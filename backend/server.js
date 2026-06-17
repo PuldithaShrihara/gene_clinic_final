@@ -354,9 +354,6 @@ let testPackages = [
     status: 'Active'
   }
 ];
-
-
-
 // Stats Endpoint
 app.get('/api/stats', (req, res) => {
   const pendingCount = appointments.filter(a => a.status === 'Pending').length;
@@ -497,8 +494,6 @@ app.patch('/api/packages/:id', (req, res) => {
 
   res.json(pkg);
 });
-
-
 
 // Start Server
 app.listen(PORT, () => {
