@@ -15,6 +15,8 @@ import About from './pages/About';
 import Clinic from './pages/Clinic';
 import Services from './pages/Services';
 import Journey from './pages/Journey';
+import Appointments from './pages/Appointments';
+import AdminDashboard from './pages/AdminDashboard';
 
 // Simple Legal Subpages to resolve footer links
 function PrivacyPolicy() {
@@ -61,6 +63,8 @@ export default function App() {
             <Route path="/clinic" element={<Clinic />} />
             <Route path="/services" element={<Services />} />
             <Route path="/journey" element={<Journey />} />
+            <Route path="/appointments" element={<Appointments />} />
+            <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-conditions" element={<TermsConditions />} />
           </Routes>
