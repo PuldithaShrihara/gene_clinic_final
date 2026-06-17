@@ -18,6 +18,7 @@ import TestPackages from './pages/TestPackages';
 import WellnessBlueprint from './pages/WellnessBlueprint';
 import Nipt from './pages/Nipt';
 import Journey from './pages/Journey';
+import Articles from './pages/Articles';
 import Appointments from './pages/Appointments';
 import AdminDashboard from './pages/AdminDashboard';
 import Research from './pages/Research';
@@ -28,17 +29,6 @@ function Contact() {
     <div className="container py-12 animate-fade-in" style={{ maxWidth: '800px', margin: '40px auto' }}>
       <h1 className="text-gradient">Contact Us</h1>
       <p style={{ marginTop: '20px' }}>Contact page is undergoing branch merge integration.</p>
-    </div>
-  );
-}
-
-
-
-function Articles() {
-  return (
-    <div className="container py-12 animate-fade-in" style={{ maxWidth: '800px', margin: '40px auto' }}>
-      <h1 className="text-gradient">Articles & Resources</h1>
-      <p style={{ marginTop: '20px' }}>Articles and educational resources are undergoing branch merge integration.</p>
     </div>
   );
 }
