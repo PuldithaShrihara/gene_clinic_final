@@ -18,20 +18,11 @@ import TestPackages from './pages/TestPackages';
 import WellnessBlueprint from './pages/WellnessBlueprint';
 import Nipt from './pages/Nipt';
 import Journey from './pages/Journey';
+import Contact from './pages/Contact';
 import Articles from './pages/Articles';
 import Appointments from './pages/Appointments';
 import AdminDashboard from './pages/AdminDashboard';
 import Research from './pages/Research';
-
-// Temporary stubs for feature pages not yet merged into main
-function Contact() {
-  return (
-    <div className="container py-12 animate-fade-in" style={{ maxWidth: '800px', margin: '40px auto' }}>
-      <h1 className="text-gradient">Contact Us</h1>
-      <p style={{ marginTop: '20px' }}>Contact page is undergoing branch merge integration.</p>
-    </div>
-  );
-}
 
 // Simple Legal Subpages to resolve footer links
 function PrivacyPolicy() {
