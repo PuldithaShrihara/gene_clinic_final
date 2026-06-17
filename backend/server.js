@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 
+
 // Global settings
 let config = {
   showPricing: true // Enabled by client request
@@ -453,7 +454,7 @@ app.get('/api/packages', (req, res) => {
 app.post('/api/packages', (req, res) => {
   const { name, sampleType, category, explanation, whoFor, deliverables, tat, price, status, remarks } = req.body;
   
-  if (!name || !sampleType || !category || !explanation || !tat || !price) {
+  if (!name || !sampleType || !category || !explanation || !tat || price === undefined) {
     return res.status(400).json({ error: 'Missing package fields' });
   }
 
@@ -466,7 +467,7 @@ app.post('/api/packages', (req, res) => {
     whoFor: whoFor || '',
     deliverables: deliverables || '',
     tat,
-    price: Number(price),
+    price: isNaN(Number(price)) ? price : Number(price),
     status: status || 'Active',
     remarks: remarks || ''
   };
@@ -486,7 +487,7 @@ app.patch('/api/packages/:id', (req, res) => {
 
   Object.keys(fields).forEach(key => {
     if (key === 'price') {
-      pkg[key] = Number(fields[key]);
+      pkg[key] = isNaN(Number(fields[key])) ? fields[key] : Number(fields[key]);
     } else if (fields[key] !== undefined) {
       pkg[key] = fields[key];
     }

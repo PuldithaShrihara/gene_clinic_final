@@ -14,9 +14,48 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Clinic from './pages/Clinic';
 import Services from './pages/Services';
+import Nipt from './pages/Nipt';
 import Journey from './pages/Journey';
 import Appointments from './pages/Appointments';
 import AdminDashboard from './pages/AdminDashboard';
+import Research from './pages/Research';
+
+// Temporary stubs for feature pages not yet merged into main
+function Contact() {
+  return (
+    <div className="container py-12 animate-fade-in" style={{ maxWidth: '800px', margin: '40px auto' }}>
+      <h1 className="text-gradient">Contact Us</h1>
+      <p style={{ marginTop: '20px' }}>Contact page is undergoing branch merge integration.</p>
+    </div>
+  );
+}
+
+function TestPackages() {
+  return (
+    <div className="container py-12 animate-fade-in" style={{ maxWidth: '800px', margin: '40px auto' }}>
+      <h1 className="text-gradient">Test Packages</h1>
+      <p style={{ marginTop: '20px' }}>Test packages catalog is undergoing branch merge integration.</p>
+    </div>
+  );
+}
+
+function WellnessBlueprint() {
+  return (
+    <div className="container py-12 animate-fade-in" style={{ maxWidth: '800px', margin: '40px auto' }}>
+      <h1 className="text-gradient">Wellness Blueprint</h1>
+      <p style={{ marginTop: '20px' }}>Wellness blueprint page is undergoing branch merge integration.</p>
+    </div>
+  );
+}
+
+function Articles() {
+  return (
+    <div className="container py-12 animate-fade-in" style={{ maxWidth: '800px', margin: '40px auto' }}>
+      <h1 className="text-gradient">Articles & Resources</h1>
+      <p style={{ marginTop: '20px' }}>Articles and educational resources are undergoing branch merge integration.</p>
+    </div>
+  );
+}
 
 // Simple Legal Subpages to resolve footer links
 function PrivacyPolicy() {
@@ -62,9 +101,15 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/clinic" element={<Clinic />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/nipt" element={<Nipt />} />
             <Route path="/journey" element={<Journey />} />
             <Route path="/appointments" element={<Appointments />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/research" element={<Research />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/test-packages" element={<TestPackages />} />
+            <Route path="/wellness-blueprint" element={<WellnessBlueprint />} />
+            <Route path="/articles" element={<Articles />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-conditions" element={<TermsConditions />} />
           </Routes>
