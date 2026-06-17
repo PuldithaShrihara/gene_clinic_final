@@ -53,8 +53,6 @@ let appointments = [
   }
 ];
 
-
-
 // Test Packages Database (Annex 3)
 let testPackages = [
   {
@@ -495,6 +493,7 @@ app.patch('/api/packages/:id', (req, res) => {
 
   res.json(pkg);
 });
+
 
 // Start Server
 app.listen(PORT, () => {
