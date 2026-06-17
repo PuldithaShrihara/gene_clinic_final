@@ -14,6 +14,8 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Clinic from './pages/Clinic';
 import Services from './pages/Services';
+import TestPackages from './pages/TestPackages';
+import WellnessBlueprint from './pages/WellnessBlueprint';
 import Journey from './pages/Journey';
 
 // Simple Legal Subpages to resolve footer links
@@ -60,6 +62,8 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/clinic" element={<Clinic />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/packages" element={<TestPackages onOpenCallbackModal={() => setIsCallbackOpen(true)} />} />
+            <Route path="/blueprint" element={<WellnessBlueprint />} />
             <Route path="/journey" element={<Journey />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-conditions" element={<TermsConditions />} />
