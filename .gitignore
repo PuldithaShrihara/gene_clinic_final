@@ -17,9 +17,14 @@ frontend/dist-ssr/
 # Environment files
 .env
 .env.local
+.env.production
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Build outputs
+dist
+build
 
 # Editor directories and files
 .vscode/*
