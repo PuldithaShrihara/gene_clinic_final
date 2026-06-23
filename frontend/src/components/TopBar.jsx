@@ -23,18 +23,6 @@ export default function TopBar({ onOpenCallbackModal }) {
             <span>WhatsApp</span>
           </a>
         </div>
-        <div className="top-bar-ctas">
-          <button onClick={onOpenCallbackModal} className="top-bar-btn btn-callback">
-            Request Callback
-          </button>
-          <Link to="/appointments?action=upload" className="top-bar-btn btn-callback" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-            <FileUp size={12} />
-            <span>Upload Report</span>
-          </Link>
-          <Link to="/appointments" className="top-bar-btn btn-book">
-            Book Appointment
-          </Link>
-        </div>
       </div>
     </div>
   );

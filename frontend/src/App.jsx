@@ -23,15 +23,9 @@ import Appointments from './pages/Appointments';
 import AdminDashboard from './pages/AdminDashboard';
 import Research from './pages/Research';
 
-// Temporary stubs for feature pages not yet merged into main
-function Contact() {
-  return (
-    <div className="container py-12 animate-fade-in" style={{ maxWidth: '800px', margin: '40px auto' }}>
-      <h1 className="text-gradient">Contact Us</h1>
-      <p style={{ marginTop: '20px' }}>Contact page is undergoing branch merge integration.</p>
-    </div>
-  );
-}
+// New Pages
+import Education from './pages/Education';
+import Faq from './pages/Faq';
 
 // Simple Legal Subpages to resolve footer links
 function PrivacyPolicy() {
@@ -84,10 +78,9 @@ export default function App() {
             <Route path="/appointments" element={<Appointments />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/research" element={<Research />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/test-packages" element={<TestPackages onOpenCallbackModal={() => setIsCallbackOpen(true)} />} />
-            <Route path="/wellness-blueprint" element={<WellnessBlueprint />} />
             <Route path="/articles" element={<Articles />} />
+            <Route path="/education" element={<Education />} />
+            <Route path="/faq" element={<Faq />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-conditions" element={<TermsConditions />} />
           </Routes>

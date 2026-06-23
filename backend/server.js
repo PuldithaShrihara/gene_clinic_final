@@ -1,10 +1,32 @@
 import express from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+if (!process.env.MONGO_URI) {
+  console.error("MONGO_URI is missing. Please add it to environment variables.");
+  process.exit(1);
+}
+const MONGO_URI = process.env.MONGO_URI;
 
-app.use(cors());
+
+
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  process.env.FRONTEND_URL
+].filter(Boolean);
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 app.use(express.json({ limit: '10mb' }));
 
 
@@ -103,7 +125,7 @@ const articles = [
     title: 'Genetics and Fitness Response',
     slug: 'genetics-and-fitness-response',
     summary: 'Discover how muscle fibers, injury recovery, and aerobic capacities are guided by DNA profile traits.',
-    content: 'Your body’s response to physical training is influenced by genetic factors. The ACTN3 gene, for instance, determines sprint power vs. endurance capacity, while COL1A1 affects ligament strength and injury susceptibility. Wellness genomics helps target exercise styles (high intensity vs. steady cardio) and structure appropriate recovery times to reduce injury risk.',
+    content: 'Your body\'s response to physical training is influenced by genetic factors. The ACTN3 gene, for instance, determines sprint power vs. endurance capacity, while COL1A1 affects ligament strength and injury susceptibility. Wellness genomics helps target exercise styles (high intensity vs. steady cardio) and structure appropriate recovery times to reduce injury risk.',
     category: 'Genomics & Wellness',
     date: 'June 18, 2026',
     author: 'Dr. Lahiru Prabodha',
@@ -154,46 +176,7 @@ let config = {
   showPricing: true // Enabled by client request
 };
 
-// In-memory appointments database
-let appointments = [
-  {
-    id: '1',
-    name: 'Dilhan Perera',
-    phone: '+94 77 123 4567',
-    email: 'dilhan.perera@example.com',
-    age: '34',
-    appointmentType: 'Genetic report review',
-    location: 'Galle Clinic',
-    mode: 'In-person',
-    reason: 'Review genetic testing results for cardiomyopathy',
-    status: 'Confirmed',
-    date: '2026-06-18',
-    timeSlot: '09:00 AM',
-    geneticReport: 'cardiomyopathy_panel.pdf',
-    medicalReport: 'ecg_summary.pdf',
-    consent: true,
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: '2',
-    name: 'Nadeesha Silva',
-    phone: '+94 71 987 6543',
-    email: 'nadeesha.s@example.com',
-    age: '29',
-    appointmentType: 'Reproductive genetics consultation',
-    location: 'Colombo Clinic',
-    mode: 'Online',
-    reason: 'Pre-pregnancy genetic risk assessment',
-    status: 'Pending',
-    date: '2026-06-19',
-    timeSlot: '11:30 AM',
-    geneticReport: null,
-    medicalReport: null,
-    consent: true,
-    createdAt: new Date().toISOString()
-  }
-];
-
+// Test Packages Database (Annex 3)
 // Test Packages Database (Annex 3)
 let testPackages = [
   {
@@ -201,7 +184,7 @@ let testPackages = [
     code: 'GC/1',
     name: 'Nutrition',
     sampleType: 'Whole Blood/Saliva/BD',
-    category: 'Wellness & Lifestyle Packages',
+    category: 'Wellness & Lifestyle',
     explanation: 'Assess genetic factors related to nutrient metabolism, vitamin absorption, and dietary sensitivities.',
     tat: '3 - 6 weeks',
     price: 125000,
@@ -212,7 +195,7 @@ let testPackages = [
     code: 'GC/2',
     name: 'Obesity',
     sampleType: 'Whole Blood/Saliva/DB',
-    category: 'Wellness & Lifestyle Packages',
+    category: 'Wellness & Lifestyle',
     explanation: 'Genetic variants profile impacting fat storage, metabolic efficiency, appetite regulation, and satiety.',
     tat: '3 - 6 weeks',
     price: 125000,
@@ -223,7 +206,7 @@ let testPackages = [
     code: 'GC/3',
     name: 'Fitness',
     sampleType: 'Whole Blood/Saliva/DB',
-    category: 'Wellness & Lifestyle Packages',
+    category: 'Wellness & Lifestyle',
     explanation: 'Analyze genetic markers linked to aerobic capacity, muscle fiber profile, and post-exercise recovery speed.',
     tat: '3 - 6 weeks',
     price: 125000,
@@ -234,7 +217,7 @@ let testPackages = [
     code: 'GC/4',
     name: 'Detox',
     sampleType: 'Whole Blood/Saliva/DB',
-    category: 'Wellness & Lifestyle Packages',
+    category: 'Wellness & Lifestyle',
     explanation: 'Genomic screen of Phase I and Phase II metabolic detoxification pathway efficiency.',
     tat: '3 - 6 weeks',
     price: 125000,
@@ -245,7 +228,7 @@ let testPackages = [
     code: 'GC/5',
     name: 'Sports Fitness',
     sampleType: 'Whole Blood/Saliva/DB',
-    category: 'Wellness & Lifestyle Packages',
+    category: 'Wellness & Lifestyle',
     explanation: 'Advanced sports genetics evaluating tendon strength, oxygen utility, and recovery characteristics.',
     tat: '3 - 6 weeks',
     price: 125000,
@@ -256,7 +239,7 @@ let testPackages = [
     code: 'GC/6',
     name: 'Ancestry',
     sampleType: 'Whole Blood/Saliva/DB',
-    category: 'Wellness & Lifestyle Packages',
+    category: 'Wellness & Lifestyle',
     explanation: 'Deep genetic lineage analysis tracing geographic roots, paternal/maternal haplogroups, and admixture.',
     tat: '3 - 6 weeks',
     price: 150000,
@@ -267,7 +250,7 @@ let testPackages = [
     code: 'GC/7',
     name: 'Hair n Skin',
     sampleType: 'Whole Blood/Saliva/DB',
-    category: 'Wellness & Lifestyle Packages',
+    category: 'Wellness & Lifestyle',
     explanation: 'Assess hair thinning risk, skin elasticity, sun damage vulnerability, and collagen degradation patterns.',
     tat: '3 - 6 weeks',
     price: 125000,
@@ -278,7 +261,7 @@ let testPackages = [
     code: 'GC/8',
     name: 'Me360 (complete package)',
     sampleType: 'Whole Blood/Saliva/DB',
-    category: 'Wellness & Lifestyle Packages',
+    category: 'Wellness & Lifestyle',
     explanation: 'Full-spectrum wellness blueprint mapping nutrition, fitness, obesity, detoxification, hair, skin, and metabolic traits.',
     tat: '3 - 6 weeks',
     price: 150000,
@@ -289,7 +272,7 @@ let testPackages = [
     code: 'GC/9',
     name: 'Polycystic Ovary Syndrome',
     sampleType: 'Whole Blood/Saliva/DB',
-    category: 'Wellness & Lifestyle Packages',
+    category: "Women's and Family Health",
     explanation: 'Genetic susceptibility screening for markers influencing PCOS risks, androgen pathways, and insulin dynamics.',
     tat: '3 - 6 weeks',
     price: 125000,
@@ -300,7 +283,7 @@ let testPackages = [
     code: 'GC/10',
     name: 'Cardiac care',
     sampleType: 'Whole Blood/Saliva/DB',
-    category: 'Wellness & Lifestyle Packages',
+    category: 'Clinical and Disease-Focused',
     explanation: 'Genomic risk score mapping markers associated with cardiomyopathy, lipid levels, and coronary arterial risk.',
     tat: '3 - 6 weeks',
     price: 125000,
@@ -311,7 +294,7 @@ let testPackages = [
     code: 'GC/11',
     name: 'Diabetes care',
     sampleType: 'Whole Blood/Saliva/DB',
-    category: 'Wellness & Lifestyle Packages',
+    category: 'Clinical and Disease-Focused',
     explanation: 'Hereditary factors assessing risk profiles for glucose tolerance, insulin sensitivity, and Type 2 Diabetes.',
     tat: '3 - 6 weeks',
     price: 125000,
@@ -322,7 +305,7 @@ let testPackages = [
     code: 'GC/12',
     name: 'Irritable bowel syndrome',
     sampleType: 'Whole Blood/Saliva/DB',
-    category: 'Wellness & Lifestyle Packages',
+    category: 'Clinical and Disease-Focused',
     explanation: 'Genomics of digestive mucosal barrier integrity, gut motility, and brain-gut pathway traits.',
     tat: '3 - 6 weeks',
     price: 125000,
@@ -333,7 +316,7 @@ let testPackages = [
     code: 'GC/13',
     name: 'Autoimmune conditions',
     sampleType: 'Whole Blood/Saliva/DB',
-    category: 'Wellness & Lifestyle Packages',
+    category: 'Clinical and Disease-Focused',
     explanation: 'Genetic predisposition analysis for rheumatoid, celiac, thyroiditis, and systemic inflammatory pathways.',
     tat: '3 - 6 weeks',
     price: 125000,
@@ -344,7 +327,7 @@ let testPackages = [
     code: 'GC/14',
     name: 'Geriatric care for dementia/Parkinson',
     sampleType: 'Whole Blood/Saliva/DB',
-    category: 'Wellness & Lifestyle Packages',
+    category: 'Clinical and Disease-Focused',
     explanation: 'Assess ApoE profile alleles and other variants linked to familial neurodegenerative progression.',
     tat: '3 - 6 weeks',
     price: 125000,
@@ -355,7 +338,7 @@ let testPackages = [
     code: 'GC/15',
     name: 'Menopause',
     sampleType: 'Whole Blood/Saliva/DB',
-    category: 'Wellness & Lifestyle Packages',
+    category: "Women's and Family Health",
     explanation: 'Genetic evaluation of bone mineral density decline risks, vasomotor response, and estrogen receptor traits.',
     tat: '3 - 6 weeks',
     price: 125000,
@@ -366,7 +349,7 @@ let testPackages = [
     code: 'GC/16',
     name: 'ADHD',
     sampleType: 'Whole Blood/Saliva/DB',
-    category: 'Wellness & Lifestyle Packages',
+    category: 'Clinical and Disease-Focused',
     explanation: 'Dopaminergic and noradrenergic genetic pathway variants associated with attention profile variations.',
     tat: '3 - 6 weeks',
     price: 125000,
@@ -377,7 +360,7 @@ let testPackages = [
     code: 'GC/17',
     name: 'Cancer - Preliminary screening',
     sampleType: 'Whole Blood/Saliva/DB',
-    category: 'Wellness & Lifestyle Packages',
+    category: 'Clinical and Disease-Focused',
     explanation: 'Assess genetic markers across tumor suppressor genes to evaluate baseline hereditary cancer risks.',
     tat: '3 - 6 weeks',
     price: 125000,
@@ -388,7 +371,7 @@ let testPackages = [
     code: 'GC/18',
     name: 'Epigenetics',
     sampleType: 'Saliva',
-    category: 'Advanced Genomics & Clinical Packages',
+    category: 'Advanced Genomic Testing',
     explanation: 'Epigenome profiling tracking DNA methylation, cellular age indicators, and environmental markers.',
     tat: '3 - 6 weeks',
     price: 'On request',
@@ -399,7 +382,7 @@ let testPackages = [
     code: 'GC/19',
     name: 'Gut microbiome',
     sampleType: 'Stool',
-    category: 'Advanced Genomics & Clinical Packages',
+    category: 'Advanced Genomic Testing',
     explanation: '16S metagenomic sequencing of digestive microflora mapping diversity index, bacterial ratios, and metabolic indicators.',
     tat: '3 - 6 weeks',
     price: 'On request',
@@ -410,7 +393,7 @@ let testPackages = [
     code: 'GC/20',
     name: 'Skin microbiome',
     sampleType: 'Skin Scraping',
-    category: 'Advanced Genomics & Clinical Packages',
+    category: 'Advanced Genomic Testing',
     explanation: 'Epidermal microflora profiling cataloging bacterial and fungal diversity related to dermatological wellness.',
     tat: '3 - 6 weeks',
     price: 'On request',
@@ -421,7 +404,7 @@ let testPackages = [
     code: 'GC/21',
     name: 'Whole exome Sequencing',
     sampleType: 'Whole Blood/Saliva/DB',
-    category: 'Advanced Genomics & Clinical Packages',
+    category: 'Advanced Genomic Testing',
     explanation: 'High-depth clinical sequencing of all 22,000 protein-coding exons to evaluate causative pathology.',
     tat: '3 - 6 weeks',
     price: 125000,
@@ -432,7 +415,7 @@ let testPackages = [
     code: 'GC/22',
     name: 'Whole genome Sequencing',
     sampleType: 'Whole Blood/Saliva/DB',
-    category: 'Advanced Genomics & Clinical Packages',
+    category: 'Advanced Genomic Testing',
     explanation: 'Complete sequencing of non-coding, structural, and regulatory regions for full clinical evaluation.',
     tat: '3 - 6 weeks',
     price: 'On request',
@@ -443,7 +426,7 @@ let testPackages = [
     code: 'GC/23',
     name: 'Clinical Panels',
     sampleType: 'Whole Blood/Saliva/DB',
-    category: 'Advanced Genomics & Clinical Packages',
+    category: 'Advanced Genomic Testing',
     explanation: 'Targeted gene panels designed for specific medical conditions, including neurological, cardiac, and rare syndromes.',
     tat: '3 - 6 weeks',
     price: 'On request',
@@ -454,7 +437,7 @@ let testPackages = [
     code: 'GC/24',
     name: 'NIPT',
     sampleType: 'Whole Blood on a Streak Tube',
-    category: 'Advanced Genomics & Clinical Packages',
+    category: "Women's and Family Health",
     explanation: 'Safe, early maternal cfDNA screening for fetal chromosomal aneuploidies (trisomy 21, 18, 13).',
     tat: '3 - 6 weeks',
     price: 'On request',
@@ -465,7 +448,7 @@ let testPackages = [
     code: 'GC/25',
     name: 'PGD',
     sampleType: 'Embryo Biopsy',
-    category: 'Advanced Genomics & Clinical Packages',
+    category: "Women's and Family Health",
     explanation: 'Pre-implantation Genetic Diagnosis screen for IVF embryos to evaluate health status before transfer.',
     tat: '3 - 6 weeks',
     price: 'On request',
@@ -476,7 +459,7 @@ let testPackages = [
     code: 'GC/26',
     name: 'Somatic/Tissue',
     sampleType: 'FFPE Block/Section',
-    category: 'Advanced Genomics & Clinical Packages',
+    category: 'Clinical and Disease-Focused',
     explanation: 'Tumor biopsy profiling mapping mutations to guide targeted oncology therapeutics and precision oncology pathways.',
     tat: '3 - 6 weeks',
     price: 'On request',
@@ -487,96 +470,20 @@ let testPackages = [
     code: 'GC/27',
     name: 'Liquid Biopsy',
     sampleType: 'Whole Blood',
-    category: 'Advanced Genomics & Clinical Packages',
+    category: 'Clinical and Disease-Focused',
     explanation: 'Non-invasive tracking of circulating tumor DNA (ctDNA) for tumor surveillance and early recurrence checks.',
     tat: '3 - 6 weeks',
     price: 'On request',
     status: 'Active'
   }
 ];
-// Stats Endpoint
-app.get('/api/stats', (req, res) => {
-  const pendingCount = appointments.filter(a => a.status === 'Pending').length;
-  const confirmedCount = appointments.filter(a => a.status === 'Confirmed').length;
-  const completedCount = appointments.filter(a => a.status === 'Completed').length;
-  
-  res.json({
-    totalAppointments: appointments.length,
-    pending: pendingCount,
-    confirmed: confirmedCount,
-    completed: completedCount,
-    activePatientsCount: 212,
-    testedCount: 178,
-    wellnessConsultations: 89
-  });
-});
 
-// Config Endpoint
-app.get('/api/config', (req, res) => {
-  res.json(config);
-});
 
-app.post('/api/config', (req, res) => {
-  const { showPricing } = req.body;
-  if (showPricing !== undefined) {
-    config.showPricing = showPricing;
-  }
-  res.json(config);
-});
+// =============================================
+// API ROUTES — All data persisted to MongoDB
+// =============================================
 
-// Appointments API
-app.get('/api/appointments', (req, res) => {
-  res.json(appointments);
-});
 
-app.post('/api/appointments', (req, res) => {
-  const { 
-    name, phone, email, age, appointmentType, location, 
-    mode, reason, date, timeSlot, geneticReport, medicalReport, consent 
-  } = req.body;
-  
-  if (!name || !phone || !email || !age || !appointmentType || !location || !mode || !reason || consent === undefined) {
-    return res.status(400).json({ error: 'Missing required fields' });
-  }
-
-  const newAppt = {
-    id: String(appointments.length + 1),
-    name,
-    phone,
-    email,
-    age,
-    appointmentType,
-    location,
-    mode,
-    reason,
-    status: 'Pending',
-    date: date || new Date().toISOString().split('T')[0],
-    timeSlot: timeSlot || 'TBD',
-    geneticReport: geneticReport || null,
-    medicalReport: medicalReport || null,
-    consent,
-    createdAt: new Date().toISOString()
-  };
-
-  appointments.push(newAppt);
-  res.status(201).json(newAppt);
-});
-
-app.patch('/api/appointments/:id', (req, res) => {
-  const { id } = req.params;
-  const { status } = req.body;
-
-  const appt = appointments.find(a => a.id === id);
-  if (!appt) {
-    return res.status(404).json({ error: 'Appointment not found' });
-  }
-
-  if (status) {
-    appt.status = status;
-  }
-
-  res.json(appt);
-});
 
 // Packages API
 app.get('/api/packages', (req, res) => {
@@ -636,7 +543,15 @@ app.patch('/api/packages/:id', (req, res) => {
 });
 
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Connect to MongoDB and start the server only upon success
+mongoose.connect(MONGO_URI)
+  .then(() => {
+    console.log('Connected to MongoDB successfully');
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error('Error: Failed to connect to MongoDB. Please check if your MONGO_URI is valid and the database is accessible.', err.message);
+    process.exit(1);
+  });

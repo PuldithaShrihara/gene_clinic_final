@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { 
   Activity, Users, FileText, CheckCircle2, Sparkles, 
   HeartHandshake, ShieldAlert, ClipboardList, Dna, 
-  HelpCircle, Microscope, Layers
+  HelpCircle, Microscope, Layers, Video
 } from 'lucide-react';
 
 export default function Services() {
@@ -91,6 +91,55 @@ export default function Services() {
       desc: 'Advanced testing pathways mapping gut microflora composition, skin microbiomes, and epigenetic biological age markers, available on request.',
       who: 'Proactive wellness clients managing gut health, metabolism issues, or interested in epigenetic health indices.',
       expect: 'Stool/swab sample coordination, bacterial diversity indexes mapping, and dietary adjustments recommendations.'
+    },
+    {
+      title: 'Wellness Counselling',
+      icon: HeartHandshake,
+      desc: 'Medically guided lifestyle and preventive wellness counselling addressing genetic predisposition markers to optimize health outcomes.',
+      who: 'Individuals seeking personalized guidance based on family health history and genetic screening indicators.',
+      expect: 'Review of lifestyle predispositions, detailed analysis of risk factors, and development of personalized wellness goals.'
+    },
+    {
+      title: 'Precision Medicine Guidance',
+      icon: Dna,
+      desc: 'Expert guidance on aligning therapeutic interventions and diagnostic strategies with individual genomic variations.',
+      who: 'Patients looking to tailor their healthcare path in collaboration with their primary physicians and genetics advisors.',
+      expect: 'Comprehensive variant review, clinical data alignment, and suggestions for individualized precision care pathways.'
+    },
+    {
+      title: 'Personalized Management',
+      icon: CheckCircle2,
+      desc: 'Clinical coordination and planning support for genetic conditions, prioritizing safe, custom-tailored management strategies.',
+      who: 'Individuals diagnosed with hereditary conditions or genetic predispositions requiring ongoing clinical supervision.',
+      expect: 'Development of clinical tracking checklists, coordination with medical specialists, and regular follow-up consultations.'
+    },
+    {
+      title: 'Nutrition & Wellness Guidance',
+      icon: Sparkles,
+      desc: 'DNA-informed dietary guidance and wellness support to optimize metabolic health, nutrient absorption, and fitness levels.',
+      who: 'Wellness clients wanting to optimize nutrition based on genetic variations in nutrient absorption and food sensitivities.',
+      expect: 'Analysis of dietary gene variants, custom nutrient guidelines, and structured lifestyle recommendations.'
+    },
+    {
+      title: 'Cancer Prevention Awareness',
+      icon: ShieldAlert,
+      desc: 'Hereditary cancer risk counselling and early screening coordination, focused on raising clinical awareness and promoting proactive checks.',
+      who: 'Individuals with a strong family history of early-onset oncological conditions or known hereditary cancer gene variants.',
+      expect: 'Detailed pedigree mapping, hereditary risk evaluations, coordinate testing suggestions, and structured surveillance schedules.'
+    },
+    {
+      title: 'Non-Communicable Disease Prevention Awareness',
+      icon: Activity,
+      desc: 'Preventive counselling and risk awareness support targeting chronic conditions like cardiovascular disease, diabetes, and metabolic syndromes.',
+      who: 'Individuals wanting to proactively manage chronic disease risks based on hereditary risk profiles and clinical family histories.',
+      expect: 'Inherited cardiac/metabolic risk reviews, lifestyle risk factor identification, and structured prevention guidelines.'
+    },
+    {
+      title: 'Online Video Consultation',
+      icon: Video,
+      desc: 'Remote clinical counselling and report interpretation sessions, bringing specialist genetics support directly to your home.',
+      who: 'Patients requiring pre-test or post-test consultations who are unable to travel to our Galle clinic center.',
+      expect: 'Secure, confidential video consultation covering family history, test coordination, or variant report explanations.'
     }
   ];
 
@@ -99,10 +148,10 @@ export default function Services() {
       {/* Page Header */}
       <section className="section bg-secondary border-bottom">
         <div className="container text-center">
-          <span className="badge badge-accent mb-4">GenSek Health Clinical Programs</span>
+          <span className="badge badge-accent mb-4">The Gene Clinic</span>
           <h1 className="text-gradient">Clinical Genetics & Wellness Genomics Services</h1>
-          <p className="lead-text mt-4" style={{ maxWidth: '800px', margin: '16px auto 0' }}>
-            We provide structured, medically responsible consultations. Select a service to read detailed profiles, expectations, and request details.
+          <p className="lead-text mt-4" style={{ maxWidth: '800px', margin: '16px auto 0', fontWeight: '500' }}>
+            The Gene Clinic by GenSek Health Private Limited provides genetic counselling, wellness counselling, precision medicine guidance, and personalized management support under the guidance of Dr. L. B. Lahiru Prabodha.
           </p>
         </div>
       </section>
