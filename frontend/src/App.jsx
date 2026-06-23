@@ -25,6 +25,10 @@ import Research from './pages/Research';
 
 // New Pages
 import RequestGeneticTest from './pages/RequestGeneticTest';
+import PatientRegistration from './pages/PatientRegistration';
+import PartnerLaboratories from './pages/PartnerLaboratories';
+import Reviews from './pages/Reviews';
+import Contact from './pages/Contact';
 
 // Simple Legal Subpages to resolve footer links
 function PrivacyPolicy() {
@@ -79,7 +83,12 @@ export default function App() {
             <Route path="/research" element={<Research />} />
             <Route path="/test-packages" element={<TestPackages onOpenCallbackModal={() => setIsCallbackOpen(true)} />} />
             <Route path="/wellness-blueprint" element={<WellnessBlueprint />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/request-genetic-test" element={<RequestGeneticTest />} />
+            <Route path="/articles" element={<Articles />} />
+            <Route path="/patient-registration" element={<PatientRegistration />} />
+            <Route path="/partner-laboratories" element={<PartnerLaboratories />} />
+            <Route path="/reviews" element={<Reviews />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-conditions" element={<TermsConditions />} />
           </Routes>

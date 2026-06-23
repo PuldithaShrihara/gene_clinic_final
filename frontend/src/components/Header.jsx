@@ -67,11 +67,6 @@ export default function Header() {
               </div>
             </li>
 
-            <li>
-              <Link to="/packages" className={`nav-link ${location.pathname === '/packages' ? 'active' : ''}`}>
-                Test Packages
-              </Link>
-            </li>
 
             <li>
               <Link to="/blueprint" className={`nav-link ${location.pathname === '/blueprint' ? 'active' : ''}`}>
@@ -79,15 +74,17 @@ export default function Header() {
               </Link>
             </li>
 
-
-
             {/* More Dropdown */}
             <li className="nav-item-dropdown">
-              <span className={`nav-link ${['/request-genetic-test'].includes(location.pathname) ? 'active' : ''}`} style={{ cursor: 'default' }}>
+              <span className={`nav-link ${['/request-genetic-test', '/patient-registration', '/partner-laboratories', '/reviews', '/contact'].includes(location.pathname) ? 'active' : ''}`} style={{ cursor: 'default' }}>
                 More <ChevronDown size={14} />
               </span>
               <div className="dropdown-menu" style={{ minWidth: '220px' }}>
                 <Link to="/request-genetic-test" className="dropdown-item">Request Genetic Test</Link>
+                <Link to="/patient-registration" className="dropdown-item">Patient Registration</Link>
+                <Link to="/partner-laboratories" className="dropdown-item">Partner Laboratories</Link>
+                <Link to="/reviews" className="dropdown-item">Client Reviews</Link>
+                <Link to="/contact" className="dropdown-item">Contact Clinic</Link>
               </div>
             </li>
           </ul>
@@ -137,9 +134,12 @@ export default function Header() {
             <li><Link to="/packages" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Test Packages</Link></li>
             <li><Link to="/blueprint" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Wellness Blueprint</Link></li>
 
-
             <li className="mobile-nav-group-title">Patient Portal & Connect</li>
             <li><Link to="/request-genetic-test" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Request Genetic Test</Link></li>
+            <li><Link to="/patient-registration" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Patient Registration</Link></li>
+            <li><Link to="/partner-laboratories" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Partner Laboratories</Link></li>
+            <li><Link to="/reviews" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Client Reviews</Link></li>
+            <li><Link to="/contact" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Contact Clinic</Link></li>
 
             <li className="mobile-nav-group-title">Follow Us</li>
             <li style={{ paddingLeft: '16px', marginTop: '10px' }}>

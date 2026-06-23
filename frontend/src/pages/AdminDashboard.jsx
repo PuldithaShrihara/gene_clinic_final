@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { API_BASE_URL } from '../config';
 import { 
   Users, Calendar, Clock, Activity, ShieldCheck, Check, 
   X, Search, Filter, AlertCircle, RefreshCw, Eye, Sparkles, FileText, ToggleLeft, ToggleRight
@@ -31,10 +32,10 @@ export default function AdminDashboard() {
     setLoading(true);
     setError('');
     try {
-      const statsRes = await fetch('http://localhost:5000/api/stats');
-      const apptsRes = await fetch('http://localhost:5000/api/appointments');
-      const pkgsRes = await fetch('http://localhost:5000/api/packages');
-      const configRes = await fetch('http://localhost:5000/api/config');
+      const statsRes = await fetch(`${API_BASE_URL}/api/stats`);
+      const apptsRes = await fetch(`${API_BASE_URL}/api/appointments`);
+      const pkgsRes = await fetch(`${API_BASE_URL}/api/packages`);
+      const configRes = await fetch(`${API_BASE_URL}/api/config`);
       
       if (statsRes.ok && apptsRes.ok && pkgsRes.ok && configRes.ok) {
         const statsData = await statsRes.json();
@@ -64,7 +65,7 @@ export default function AdminDashboard() {
     const nextVal = !showPricing;
     setShowPricing(nextVal);
     try {
-      await fetch('http://localhost:5000/api/config', {
+      await fetch(`${API_BASE_URL}/api/config`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -72,7 +73,7 @@ export default function AdminDashboard() {
         body: JSON.stringify({ showPricing: nextVal }),
       });
       // Re-fetch packages to reflect masked vs. visible prices
-      const pkgsRes = await fetch('http://localhost:5000/api/packages');
+      const pkgsRes = await fetch(`${API_BASE_URL}/api/packages`);
       if (pkgsRes.ok) {
         const pkgsData = await pkgsRes.json();
         setPackages(pkgsData);
@@ -85,7 +86,7 @@ export default function AdminDashboard() {
   const handleUpdateStatus = async (id, newStatus) => {
     setUpdatingId(id);
     try {
-      const res = await fetch(`http://localhost:5000/api/appointments/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/appointments/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -97,7 +98,7 @@ export default function AdminDashboard() {
         const updated = await res.json();
         setAppointments(appointments.map(a => a.id === id ? updated : a));
         // Refresh stats
-        const statsRes = await fetch('http://localhost:5000/api/stats');
+        const statsRes = await fetch(`${API_BASE_URL}/api/stats`);
         if (statsRes.ok) {
           const statsData = await statsRes.json();
           setStats(statsData);
@@ -123,7 +124,7 @@ export default function AdminDashboard() {
     e.preventDefault();
     setSavingPkg(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/packages/${selectedPkg.id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/packages/${selectedPkg.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
