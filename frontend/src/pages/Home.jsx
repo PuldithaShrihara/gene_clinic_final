@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../config';
 import { 
   ShieldCheck, Dna, ClipboardList, BookOpen, 
   ChevronRight, Calendar, User, Microscope, 
@@ -11,7 +12,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/articles')
+    fetch(`${API_BASE_URL}/api/articles`)
       .then(res => res.json())
       .then(data => setArticles(data.slice(0, 3)))
       .catch(err => console.log('Failed to fetch articles:', err));
@@ -46,17 +47,36 @@ export default function Home() {
       <section className="section hero-section animate-fade-in" style={{ position: 'relative', zIndex: 1, paddingBottom: '80px' }}>
         <div className="container hero-container">
           <div className="hero-content">
-            <span className="badge badge-accent mb-4">Clinical Genetics & Wellness Genomics</span>
-            <h1 className="text-gradient">Personalized Genetic Care for Better Health Decisions</h1>
-            <p className="hero-subheadline">
-              Specialist clinical genetics, genetic counselling, NIPT, wellness genomics, sequencing, and genetic report interpretation led by Dr. Lahiru Prabodha.
+            <span className="badge badge-accent mb-4">The Gene Clinic</span>
+            <h1 className="text-gradient" style={{ fontSize: 'clamp(2rem, 5vw, 2.8rem)', lineHeight: '1.2', marginBottom: '16px' }}>
+              Genetic & Wellness Counselling by GenSek Health Private Limited
+            </h1>
+            <p className="font-bold text-accent mb-3" style={{ color: 'var(--accent)', fontWeight: 700, fontSize: '1.05rem' }}>
+              Led by Dr. L. B. Lahiru Prabodha, Clinical Geneticist and Genetic Counsellor
             </p>
+            <p className="hero-subheadline" style={{ marginBottom: '20px' }}>
+              The Gene Clinic by GenSek Health Private Limited supports individuals, families, and healthcare professionals with genetic counselling, wellness counselling, genetic test guidance, report interpretation, precision medicine insights, and personalized wellness planning.
+            </p>
+            
+            {/* Highlight Badges */}
+            <div className="flex-row gap-3 mb-6 flex-wrap" style={{ display: 'flex', gap: '10px', marginTop: '16px', marginBottom: '24px' }}>
+              <span className="badge badge-secondary" style={{ padding: '6px 14px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 700 }}>
+                👤 Dr. L. B. Lahiru Prabodha
+              </span>
+              <span className="badge badge-accent" style={{ padding: '6px 14px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 700 }}>
+                🧬 The Gene Clinic
+              </span>
+              <span className="badge badge-secondary" style={{ padding: '6px 14px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 700 }}>
+                🏢 GenSek Health Private Limited
+              </span>
+            </div>
+
             <div className="hero-actions">
               <Link to="/appointments" className="btn btn-primary">
-                Book Appointment <Calendar size={18} />
+                Book Counselling <Calendar size={18} />
               </Link>
-              <Link to="/services" className="btn btn-secondary">
-                Explore Services
+              <Link to="/request-genetic-test" className="btn btn-secondary">
+                Request Genetic Test
               </Link>
             </div>
           </div>
@@ -130,6 +150,99 @@ export default function Home() {
             <div className="trust-item">
               <Award size={18} />
               <span>Academic & Laboratory Expertise</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Quick Access Cards Section */}
+      <section className="section section-light bg-wave-lines" style={{ padding: '60px 0', position: 'relative', zIndex: 1 }}>
+        <div className="container" style={{ maxWidth: '1200px' }}>
+          <div className="text-center mb-10">
+            <span className="badge badge-accent mb-2">Quick Services Access</span>
+            <h2>How Can We Assist You Today?</h2>
+            <p style={{ maxWidth: '600px', margin: '8px auto 0', color: 'var(--text-muted)' }}>
+              Select a quick pathway to book counselling, request testing panels, register demographics, or access genomics education.
+            </p>
+          </div>
+          
+          <div className="grid grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
+            <div className="card hover-scale flex-col-card" style={{ padding: '24px', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)' }}>
+              <div className="flex-row align-center gap-3 mb-3" style={{ display: 'flex' }}>
+                <div className="flex-row-center text-secondary" style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(2, 132, 199, 0.08)', display: 'flex' }}>
+                  <MessageCircle size={20} />
+                </div>
+                <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700 }}>General Inquiries</h4>
+              </div>
+              <p className="xsmall-text text-muted" style={{ flexGrow: 1, marginBottom: '20px', lineHeight: '1.5' }}>
+                Send a general inquiry to our clinical team regarding appointments, location maps, or coordination details.
+              </p>
+              <Link to="/contact" className="btn btn-secondary btn-sm text-center" style={{ width: '100%' }}>Contact Clinic</Link>
+            </div>
+
+            <div className="card hover-scale flex-col-card" style={{ padding: '24px', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)' }}>
+              <div className="flex-row align-center gap-3 mb-3" style={{ display: 'flex' }}>
+                <div className="flex-row-center text-accent" style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(15, 118, 110, 0.08)', display: 'flex' }}>
+                  <Dna size={20} />
+                </div>
+                <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700 }}>Request Genetic Test</h4>
+              </div>
+              <p className="xsmall-text text-muted" style={{ flexGrow: 1, marginBottom: '20px', lineHeight: '1.5' }}>
+                Submit a request for wellness genomics, prenatal screening, or clinical diagnostics coordination.
+              </p>
+              <Link to="/request-genetic-test" className="btn btn-primary btn-sm text-center" style={{ width: '100%' }}>Request Test</Link>
+            </div>
+
+            <div className="card hover-scale flex-col-card" style={{ padding: '24px', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)' }}>
+              <div className="flex-row align-center gap-3 mb-3" style={{ display: 'flex' }}>
+                <div className="flex-row-center text-secondary" style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(2, 132, 199, 0.08)', display: 'flex' }}>
+                  <Calendar size={20} />
+                </div>
+                <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700 }}>Book Appointment</h4>
+              </div>
+              <p className="xsmall-text text-muted" style={{ flexGrow: 1, marginBottom: '20px', lineHeight: '1.5' }}>
+                Schedule a session for pre-test or post-test genetic counselling and report review.
+              </p>
+              <Link to="/appointments" className="btn btn-secondary btn-sm text-center" style={{ width: '100%' }}>Book Counselling</Link>
+            </div>
+
+            <div className="card hover-scale flex-col-card" style={{ padding: '24px', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)' }}>
+              <div className="flex-row align-center gap-3 mb-3" style={{ display: 'flex' }}>
+                <div className="flex-row-center text-secondary" style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(2, 132, 199, 0.08)', display: 'flex' }}>
+                  <ClipboardList size={20} />
+                </div>
+                <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700 }}>Patient Registration</h4>
+              </div>
+              <p className="xsmall-text text-muted" style={{ flexGrow: 1, marginBottom: '20px', lineHeight: '1.5' }}>
+                Submit patient intake details, emergency contact, and clinical history prior to testing or counselling.
+              </p>
+              <Link to="/patient-registration" className="btn btn-secondary btn-sm text-center" style={{ width: '100%' }}>Register Profile</Link>
+            </div>
+
+            <div className="card hover-scale flex-col-card" style={{ padding: '24px', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)' }}>
+              <div className="flex-row align-center gap-3 mb-3" style={{ display: 'flex' }}>
+                <div className="flex-row-center text-secondary" style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(2, 132, 199, 0.08)', display: 'flex' }}>
+                  <Phone size={20} />
+                </div>
+                <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700 }}>Online Video Consultation</h4>
+              </div>
+              <p className="xsmall-text text-muted" style={{ flexGrow: 1, marginBottom: '20px', lineHeight: '1.5' }}>
+                Consult remotely with our clinical team. Available for pre-screening and report interpretation sessions.
+              </p>
+              <Link to="/appointments?type=Online%20Video%20Consultation" className="btn btn-secondary btn-sm text-center" style={{ width: '100%' }}>Book Video Call</Link>
+            </div>
+
+            <div className="card hover-scale flex-col-card" style={{ padding: '24px', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)' }}>
+              <div className="flex-row align-center gap-3 mb-3" style={{ display: 'flex' }}>
+                <div className="flex-row-center text-accent" style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(15, 118, 110, 0.08)', display: 'flex' }}>
+                  <BookOpen size={20} />
+                </div>
+                <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700 }}>Genomics Education</h4>
+              </div>
+              <p className="xsmall-text text-muted" style={{ flexGrow: 1, marginBottom: '20px', lineHeight: '1.5' }}>
+                Explore community and clinical information resources explaining variants, screening, and precision medicine.
+              </p>
+              <Link to="/education" className="btn btn-secondary btn-sm text-center" style={{ width: '100%' }}>Browse Hub</Link>
             </div>
           </div>
         </div>
@@ -291,7 +404,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-2">
+          <div className="grid grid-4">
             <div className="video-card">
               <div className="video-embed-container">
                 <iframe
