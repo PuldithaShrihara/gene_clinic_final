@@ -19,8 +19,10 @@ export default function About() {
           </div>
           <div className="profile-info">
             <span className="badge badge-accent mb-4">Clinical Geneticist Profile</span>
-            <h1 className="text-gradient" style={{ fontSize: '2.6rem', marginBottom: '12px' }}>Dr. L. B. Lahiru Prabodha</h1>
-            <h3>MBBS, MPhil, MSc Clinical Genetics</h3>
+            <h1 className="text-gradient" style={{ fontSize: '2.6rem', marginBottom: '12px' }}>About Dr. L. B. Lahiru Prabodha</h1>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '16px', lineHeight: '1.4' }}>
+              Clinical Geneticist and Genetic Counsellor | The Gene Clinic | GenSek Health Private Limited
+            </h3>
             <p className="lead-text mt-4">
               Clinical Geneticist, Genetic Counselor, Senior Lecturer, and Head of the Molecular Genetic Laboratory at the Faculty of Medicine, University of Ruhuna, Galle, Sri Lanka. Director of GenSek Health Pvt Ltd.
             </p>
@@ -32,6 +34,35 @@ export default function About() {
                 Qualifications & Academia
               </a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Brand & Corporate Identity Section */}
+      <section className="section bg-secondary border-bottom" style={{ borderTop: '1px solid var(--border-color)', padding: '48px 0' }}>
+        <div className="container" style={{ maxWidth: '1200px' }}>
+          <div className="grid grid-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px' }}>
+            
+            {/* About The Gene Clinic */}
+            <div className="card card-glass" style={{ padding: '32px', position: 'relative' }}>
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '4px', background: 'var(--accent)', borderTopLeftRadius: '16px', borderTopRightRadius: '16px' }}></div>
+              <span className="badge badge-accent mb-3">Our Platform</span>
+              <h3 style={{ fontSize: '1.35rem', fontWeight: 700, marginBottom: '12px' }}>About The Gene Clinic</h3>
+              <p className="small-text text-muted" style={{ lineHeight: '1.6', margin: 0 }}>
+                The Gene Clinic is a genetics-focused healthcare service platform providing genetic counselling, wellness counselling, genetic test guidance, NIPT support, report interpretation, and personalized health planning.
+              </p>
+            </div>
+
+            {/* About GenSek Health Private Limited */}
+            <div className="card card-glass" style={{ padding: '32px', position: 'relative' }}>
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '4px', background: 'var(--secondary)', borderTopLeftRadius: '16px', borderTopRightRadius: '16px' }}></div>
+              <span className="badge badge-secondary mb-3">Corporate Sponsor</span>
+              <h3 style={{ fontSize: '1.35rem', fontWeight: 700, marginBottom: '12px' }}>About GenSek Health Private Limited</h3>
+              <p className="small-text text-muted" style={{ lineHeight: '1.6', margin: 0 }}>
+                GenSek Health Private Limited is the company behind The Gene Clinic, supporting access to genetics and wellness-related services through counselling, testing coordination, patient education, laboratory collaboration, and professional interpretation support.
+              </p>
+            </div>
+
           </div>
         </div>
       </section>

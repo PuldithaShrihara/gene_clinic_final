@@ -396,9 +396,13 @@ p {
 
 /* Top bar override */
 .top-bar {
-  background-color: var(--primary);
+  background-color: #0f172a;
   padding: 8px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+[data-theme="dark"] .top-bar {
+  background-color: #090d16;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
 .top-bar-container {
   display: flex;
@@ -491,12 +495,13 @@ p {
   background-color: var(--bg-secondary);
   border-bottom: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
-  padding: 8px 0; /* Slim header height */
+  padding: 24px 0; /* Taller header height */
   position: sticky;
   top: 0;
   z-index: 1000;
   transition: all var(--transition-fast);
 }
+
 
 h3 {
   font-size: clamp(1.2rem, 3vw, 1.6rem);
@@ -525,10 +530,11 @@ h3 {
 .header-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   text-decoration: none;
   color: var(--text-main);
   flex-shrink: 0;
+  min-width: 360px; /* Allocate and protect horizontal space for the brand logo */
 }
 .logo-icon {
   color: var(--secondary);
@@ -536,6 +542,8 @@ h3 {
 .logo-text {
   display: flex;
   flex-direction: column;
+  white-space: nowrap; /* Prevent brand name and subtitle wrapping */
+  flex-shrink: 0;
 }
 .logo-name {
   font-family: var(--font-heading);
@@ -558,12 +566,12 @@ h3 {
 .desktop-nav .nav-list {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 8px; /* Slightly reduced gap from 11px to fit larger logo */
   list-style: none;
 }
 .nav-link {
   color: var(--text-muted);
-  font-size: 0.83rem;
+  font-size: 0.8rem; /* Slightly reduced font size from 0.83rem */
   font-weight: 600;
   white-space: nowrap; /* Prevent menu breaking into 2 lines */
   padding: 8px 0;
@@ -1203,6 +1211,15 @@ h3 {
   background-color: #20ba5a !important;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+}
+.footer-action-buttons .btn-facebook {
+  background-color: #1877F2 !important;
+  color: #ffffff !important;
+}
+.footer-action-buttons .btn-facebook:hover {
+  background-color: #166fe5 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.2);
 }
 .footer-action-buttons .btn-book-appt {
   background-color: var(--secondary) !important;
