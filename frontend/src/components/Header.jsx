@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Sun, Moon, Dna, ChevronDown } from 'lucide-react';
+import { Menu, X, Sun, Moon, ChevronDown } from 'lucide-react';
+import logoImg from '../assets/logo.png';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,10 +24,10 @@ export default function Header() {
       <div className="container header-container">
         {/* Logo */}
         <Link to="/" className="header-logo" onClick={closeMenu}>
-          <Dna className="logo-icon animate-pulse" size={26} />
+          <img src={logoImg} alt="The Gene Clinic Logo" className="logo-image" style={{ height: '110px', width: 'auto', objectFit: 'contain', margin: '-24px 0' }} />
           <div className="logo-text">
-            <span className="logo-name">Dr. Lahiru Prabodha</span>
-            <span className="logo-sub">The Gene Clinic</span>
+            <span className="logo-name" style={{ fontSize: '1.5rem', lineHeight: '1.1' }}>The Gene Clinic</span>
+            <span className="logo-sub" style={{ fontSize: '0.8rem', textTransform: 'none', letterSpacing: '0.02em', whiteSpace: 'nowrap' }}>GenSek Health Private Limited</span>
           </div>
         </Link>
 
@@ -55,51 +56,17 @@ export default function Header() {
               <span className={`nav-link ${location.pathname === '/services' ? 'active' : ''}`} style={{ cursor: 'default' }}>
                 Services <ChevronDown size={14} />
               </span>
-              <div className="dropdown-menu">
+              <div className="dropdown-menu" style={{ minWidth: '240px' }}>
                 <Link to="/services" className="dropdown-item">Clinical Genetics</Link>
-                <Link to="/services" className="dropdown-item">Genetic Counselling</Link>
-                <Link to="/services" className="dropdown-item">Genetic Report Interpretation</Link>
-                <Link to="/services" className="dropdown-item">Wellness Genomics</Link>
-                <Link to="/nipt" className="dropdown-item">NIPT / Prenatal Screening</Link>
-                <Link to="/services" className="dropdown-item">Sequencing & Panels</Link>
+                <Link to="/services" className="dropdown-item">Wellness Counselling</Link>
+                <Link to="/services" className="dropdown-item">Precision Medicine Guidance</Link>
+                <Link to="/services" className="dropdown-item">Personalized Management</Link>
+                <Link to="/services" className="dropdown-item">Nutrition & Wellness Guidance</Link>
+                <Link to="/services" className="dropdown-item">Cancer & NCD Prevention</Link>
+                <Link to="/services" className="dropdown-item">Online Video Consultation</Link>
               </div>
             </li>
 
-            <li>
-              <Link to="/packages" className={`nav-link ${location.pathname === '/packages' ? 'active' : ''}`}>
-                Test Packages
-              </Link>
-            </li>
-
-            <li>
-              <Link to="/blueprint" className={`nav-link ${location.pathname === '/blueprint' ? 'active' : ''}`}>
-                Wellness Blueprint
-              </Link>
-            </li>
-
-            <li>
-              <Link to="/nipt" className={`nav-link ${location.pathname === '/nipt' ? 'active' : ''}`}>
-                NIPT
-              </Link>
-            </li>
-
-            {/* Resources Dropdown */}
-            <li className="nav-item-dropdown">
-              <span className={`nav-link ${location.pathname === '/journey' || location.pathname === '/research' || location.pathname === '/articles' ? 'active' : ''}`} style={{ cursor: 'default' }}>
-                Resources <ChevronDown size={14} />
-              </span>
-              <div className="dropdown-menu">
-                <Link to="/journey" className="dropdown-item">Patient Journey</Link>
-                <Link to="/research" className="dropdown-item">Research</Link>
-                <Link to="/articles" className="dropdown-item">Articles</Link>
-              </div>
-            </li>
-
-            <li>
-              <Link to="/contact" className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`}>
-                Contact
-              </Link>
-            </li>
           </ul>
         </nav>
 
@@ -129,8 +96,8 @@ export default function Header() {
       </div>
 
       {/* Mobile Drawer (with Grouped Items) */}
-      <div className={`mobile-drawer ${isOpen ? 'open' : ''}`}>
-        <nav className="mobile-nav">
+      <div className={`mobile-drawer ${isOpen ? 'open' : ''}`} style={{ maxHeight: 'calc(100vh - 70px)', overflowY: 'auto' }}>
+        <nav className="mobile-nav" style={{ paddingBottom: '40px' }}>
           <ul>
             <li>
               <Link to="/" onClick={closeMenu} className="mobile-nav-link">
@@ -139,27 +106,14 @@ export default function Header() {
             </li>
 
             <li className="mobile-nav-group-title">About</li>
-            <li><Link to="/about" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.95rem' }}>About Doctor</Link></li>
-            <li><Link to="/clinic" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.95rem' }}>The Gene Clinic</Link></li>
+            <li><Link to="/about" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>About Doctor</Link></li>
+            <li><Link to="/clinic" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>The Gene Clinic</Link></li>
 
-            <li className="mobile-nav-group-title">Services</li>
-            <li><Link to="/services" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.95rem' }}>Genetic Services</Link></li>
-            <li><Link to="/packages" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.95rem' }}>Test Packages</Link></li>
-            <li><Link to="/blueprint" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.95rem' }}>Wellness Blueprint</Link></li>
-            <li><Link to="/nipt" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.95rem' }}>NIPT Prenatal</Link></li>
+            <li className="mobile-nav-group-title">Services & Panels</li>
+            <li><Link to="/services" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>All Services</Link></li>
 
-            <li className="mobile-nav-group-title">Resources</li>
-            <li><Link to="/journey" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.95rem' }}>Patient Journey</Link></li>
-            <li><Link to="/research" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.95rem' }}>Research</Link></li>
-            <li><Link to="/articles" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.95rem' }}>Articles</Link></li>
 
-            <li className="mobile-nav-group-title">Connect</li>
-            <li>
-              <Link to="/contact" onClick={closeMenu} className="mobile-nav-link">
-                Contact
-              </Link>
-            </li>
-            <li className="mobile-drawer-cta">
+            <li className="mobile-drawer-cta" style={{ marginTop: '24px' }}>
               <Link to="/appointments" onClick={closeMenu} className="btn btn-primary w-full text-center">
                 Book Appointment
               </Link>
