@@ -3,6 +3,10 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
+import Contact from './models/Contact.js';
+import PatientRegistration from './models/PatientRegistration.js';
+import PartnerLabInquiry from './models/PartnerLabInquiry.js';
+import Review from './models/Review.js';
 
 dotenv.config();
 
@@ -13,9 +17,6 @@ if (!process.env.MONGO_URI) {
   process.exit(1);
 }
 const MONGO_URI = process.env.MONGO_URI;
-
-
-
 
 const allowedOrigins = [
   "http://localhost:5173",
@@ -28,7 +29,6 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
-
 
 // Articles Data
 const articles = [
@@ -166,17 +166,30 @@ const articles = [
   }
 ];
 
-
 // Articles API
 app.get('/api/articles', (req, res) => {
   res.json(articles);
 });
+
 // Global settings
 let config = {
   showPricing: true // Enabled by client request
 };
 
-// Test Packages Database (Annex 3)
+// Config Endpoint
+app.get('/api/config', (req, res) => {
+  res.json(config);
+});
+
+app.post('/api/config', (req, res) => {
+  const { showPricing } = req.body;
+  if (showPricing !== undefined) {
+    config.showPricing = showPricing;
+  }
+  res.json(config);
+});
+
+// Test Packages Database
 // Test Packages Database (Annex 3)
 let testPackages = [
   {
@@ -478,12 +491,150 @@ let testPackages = [
   }
 ];
 
-
-// =============================================
+// ---------------------------------------------
 // API ROUTES — All data persisted to MongoDB
-// =============================================
+// ---------------------------------------------
 
+// Contact API
+app.post('/api/contact', async (req, res) => {
+  try {
+    const { name, phone, email, subject, message, preferredContactMethod } = req.body;
+    if (!name || !phone) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+    const newContact = await Contact.create({
+      name,
+      phone,
+      email: email || '',
+      subject: subject || 'Contact Inquiry',
+      message: message || '',
+      preferredContactMethod: preferredContactMethod || 'phone',
+      status: 'Pending'
+    });
+    res.status(201).json(newContact);
+  } catch (err) {
+    console.error('Error creating contact:', err.message);
+    res.status(500).json({ error: 'Server error while saving contact' });
+  }
+});
 
+app.get('/api/contact', async (req, res) => {
+  try {
+    const contacts = await Contact.find().sort({ createdAt: -1 });
+    res.json(contacts);
+  } catch (err) {
+    console.error('Error fetching contacts:', err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Patient Registrations API
+app.post('/api/patient-registrations', async (req, res) => {
+  try {
+    const { name, dob, age, gender, phone, email, address, nic, emergencyContactName, emergencyContactNumber, reason, medicalCondition, currentMedications, consent, uploadedReports } = req.body;
+    if (!name || !phone || !email || consent === undefined) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+    const newRegistration = await PatientRegistration.create({
+      name,
+      dob: dob || '',
+      age: age || '',
+      gender: gender || '',
+      phone,
+      email,
+      address: address || '',
+      nic: nic || '',
+      emergencyContactName: emergencyContactName || '',
+      emergencyContactNumber: emergencyContactNumber || '',
+      reason: reason || '',
+      medicalCondition: medicalCondition || '',
+      currentMedications: currentMedications || '',
+      uploadedReports: uploadedReports || [],
+      consent,
+      status: 'Registered'
+    });
+    res.status(201).json(newRegistration);
+  } catch (err) {
+    console.error('Error creating patient registration:', err.message);
+    res.status(500).json({ error: 'Server error while saving registration' });
+  }
+});
+
+app.get('/api/patient-registrations', async (req, res) => {
+  try {
+    const registrations = await PatientRegistration.find().sort({ createdAt: -1 });
+    res.json(registrations);
+  } catch (err) {
+    console.error('Error fetching patient registrations:', err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Partner Lab Inquiries API
+app.post('/api/partner-lab-inquiries', async (req, res) => {
+  try {
+    const { labName, contactPerson, phone, email, location, services, message } = req.body;
+    if (!labName || !contactPerson || !phone || !email) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+    const newInquiry = await PartnerLabInquiry.create({
+      labName,
+      contactPerson,
+      phone,
+      email,
+      location: location || '',
+      services: services || '',
+      message: message || '',
+      status: 'Pending'
+    });
+    res.status(201).json(newInquiry);
+  } catch (err) {
+    console.error('Error creating partner lab inquiry:', err.message);
+    res.status(500).json({ error: 'Server error while saving inquiry' });
+  }
+});
+
+app.get('/api/partner-lab-inquiries', async (req, res) => {
+  try {
+    const inquiries = await PartnerLabInquiry.find().sort({ createdAt: -1 });
+    res.json(inquiries);
+  } catch (err) {
+    console.error('Error fetching partner lab inquiries:', err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Reviews API
+app.post('/api/reviews', async (req, res) => {
+  try {
+    const { name, serviceType, rating, review, consent } = req.body;
+    if (!name || !rating || !review || consent === undefined) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+    const newReview = await Review.create({
+      name,
+      serviceType: serviceType || 'General Consultation',
+      rating: Number(rating),
+      review,
+      consent,
+      status: 'Pending'
+    });
+    res.status(201).json(newReview);
+  } catch (err) {
+    console.error('Error creating review:', err.message);
+    res.status(500).json({ error: 'Server error while saving review' });
+  }
+});
+
+app.get('/api/reviews', async (req, res) => {
+  try {
+    const reviews = await Review.find().sort({ createdAt: -1 });
+    res.json(reviews);
+  } catch (err) {
+    console.error('Error fetching reviews:', err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
 
 // Packages API
 app.get('/api/packages', (req, res) => {
@@ -541,7 +692,6 @@ app.patch('/api/packages/:id', (req, res) => {
 
   res.json(pkg);
 });
-
 
 // Connect to MongoDB and start the server only upon success
 mongoose.connect(MONGO_URI)
