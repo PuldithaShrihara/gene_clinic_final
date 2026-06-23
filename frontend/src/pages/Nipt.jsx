@@ -25,31 +25,27 @@ export default function Nipt() {
   const faqs = [
     { 
       q: 'Is NIPT a diagnostic test?', 
-      a: 'No, NIPT is a prenatal screening test. It calculates the statistical probability of a chromosomal condition but does not confirm a diagnosis. Any high-risk result requires confirmatory diagnostic testing (such as amniocentesis or CVS) before clinical decisions.' 
+      a: 'No. NIPT (Non-Invasive Prenatal Testing) is a screening test. It calculates the statistical probability of a chromosomal variant but does not confirm a definitive clinical diagnosis. Any high-risk screening result must be verified through confirmatory diagnostic testing (like amniocentesis or chorionic villus sampling - CVS) before making medical decisions.' 
     },
     { 
-      q: 'When can NIPT be done?', 
-      a: 'NIPT is valid and can be performed starting from 10 completed weeks of pregnancy. Testing earlier is not recommended as the fetal DNA fraction in the mother\'s blood may be too low, leading to inconclusive results or sample failure.' 
+      q: 'Why is the 10-week gestational timing so important?', 
+      a: 'Testing must occur only after 10 completed weeks of gestation (verified by ultrasound). Before 10 weeks, the concentration of fetal cell-free DNA (fetal fraction) in the maternal blood is often too low, which can lead to test failures, inconclusive results, or false negatives.' 
     },
     { 
-      q: 'What sample is needed?', 
-      a: 'A simple maternal whole blood sample (usually 7-10ml) drawn from the arm. Fetal DNA fragments from the placenta circulate in the mother\'s bloodstream and are analyzed during the screening.' 
+      q: 'What is required for the informed consent process?', 
+      a: 'A signed clinical informed consent form is mandatory. This document confirms the patient understands the screening nature of the test, its accuracy parameters, biological limitations, and the data protection guidelines covering their genomic data.' 
     },
     { 
-      q: 'What does a high-risk result mean?', 
-      a: 'A high-risk result indicates a higher probability that the pregnancy is affected by a screened chromosomal condition. It is not a definitive diagnosis. You will receive professional counselling to discuss options for confirmatory diagnostic testing.' 
+      q: 'What is the NIFTY Mono screen?', 
+      a: 'The NIFTY Mono is an advanced panel that screens for specific dominant monogenic (single-gene) conditions—such as skeletal dysplasias, Noonan syndrome, and Rett syndrome. These conditions are associated with paternal age factors and are not detected by standard NIPT chromosomal aneuploidy tests.' 
     },
     { 
-      q: 'Can NIPT detect all genetic conditions?', 
-      a: 'No. NIPT screens specifically for selected chromosomal trisomies (21, 18, 13) and sex chromosome differences. It does not screen for structural physical abnormalities, brain/neural tube defects, or all genetic disorders.' 
+      q: 'Who is suitable for NIFTY prenatal screens?', 
+      a: 'Suitable for singleton pregnancies, twin pregnancies, and IVF (including donor egg) pregnancies. It is not suitable for patients with a history of malignancies, organ transplants, stem cell therapy, or maternal chromosomal abnormalities.' 
     },
     { 
-      q: 'Do I need a doctor consultation before testing?', 
-      a: 'Yes. Pre-test genetic counselling with Dr. Lahiru Prabodha or a qualified medical professional is highly recommended to confirm gestational timing, review clinical family history, and ensure the test is suitable for your pregnancy.' 
-    },
-    { 
-      q: 'How long does it take to receive results?', 
-      a: 'Results are typically returned within 7 to 10 working days from the time the sample is processed at our partner laboratory.' 
+      q: 'What are the main sample rejection reasons?', 
+      a: 'Common reasons include sample collection in incorrect/expired tubes (approved Streck cfDNA tubes are mandatory), insufficient blood volume (less than 7-10ml), extreme transport temperatures (ambient storage is required; never freeze), or incomplete consent documentation.' 
     }
   ];
 
@@ -59,7 +55,7 @@ export default function Nipt() {
     'Insufficient sample volume (typically less than 7-10ml of maternal blood)',
     'Severe haemolysis, clotting, lipemia, or bacterial contamination of the sample',
     'Improper transport temperature (sample exposed to extreme heat or frozen)',
-    'Inappropriate or expired collection tube (use of non-approved cfDNA tubes)',
+    'Inappropriate or expired collection tube (use of approved cfDNA tubes is mandatory)',
     'Missing signed consent documentation or clinical request forms'
   ];
 
@@ -71,54 +67,52 @@ export default function Nipt() {
     <div className="nipt-page animate-fade-in bg-wave-lines" style={{ position: 'relative' }}>
       
       {/* Premium Hero Section */}
-      <section className="section" style={{ padding: '60px 0 40px', borderBottom: '1px solid var(--border-color)' }}>
+      <section className="section bg-secondary border-bottom" style={{ padding: '60px 0 40px' }}>
         <div className="container" style={{ maxWidth: '1200px' }}>
           <div className="hero-container" style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '40px', alignItems: 'center' }}>
             
             {/* Left side */}
             <div className="flex-col" style={{ alignItems: 'flex-start' }}>
-              <span className="badge badge-accent mb-4" style={{ fontSize: '0.8rem', padding: '6px 16px' }}>
-                Prenatal Genetics
-              </span>
+              <span className="badge badge-accent mb-4">Prenatal Diagnostics Coordination</span>
               <h1 className="text-gradient" style={{ fontSize: 'clamp(2.2rem, 5.5vw, 3.4rem)', lineHeight: '1.15', fontWeight: 800, margin: '12px 0 20px', letterSpacing: '-0.02em' }}>
-                Non-Invasive Prenatal Screening
+                Non-Invasive Prenatal Testing (NIPT)
               </h1>
-              <p className="lead-text" style={{ fontSize: 'clamp(1rem, 3vw, 1.15rem)', color: 'var(--text-muted)', lineHeight: '1.7', maxWidth: '600px', marginBottom: '32px' }}>
-                Professional guidance for NIPT screening from 10 weeks of pregnancy, with clinical genetic counselling and responsible result interpretation.
+              <p className="lead-text" style={{ color: 'var(--text-muted)', lineHeight: '1.7', marginBottom: '32px' }}>
+                Professional coordination, pre-test clinical genetic counselling, and responsible report interpretation for the NIFTY series screens from 10 weeks of pregnancy.
               </p>
               
               <div className="hero-actions" style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
                 <Link to="/appointments?type=NIPT%20consultation" className="btn btn-primary" style={{ padding: '14px 28px' }}>
                   <Calendar size={18} /> Book NIPT Consultation
                 </Link>
-                <a href="#what-is-nipt" className="btn btn-secondary" style={{ padding: '14px 28px', color: 'var(--text-main)' }}>
-                  Learn How It Works
-                </a>
+                <Link to="/request-genetic-test" className="btn btn-secondary" style={{ padding: '14px 28px' }}>
+                  Request NIPT Screening
+                </Link>
               </div>
             </div>
 
             {/* Right side - Premium Card Graphic */}
-            <div className="card card-glass flex-col" style={{ padding: '32px', border: '1px solid var(--border-color)', boxShadow: 'var(--shadow-lg)', position: 'relative' }}>
-              <div className="flex-row-center" style={{ width: '64px', height: '64px', borderRadius: '50%', backgroundColor: 'rgba(2, 132, 199, 0.1)', color: 'var(--secondary)', marginBottom: '20px' }}>
+            <div className="card card-glass flex-col" style={{ padding: '32px', position: 'relative' }}>
+              <div className="flex-row-center" style={{ width: '64px', height: '64px', borderRadius: '50%', backgroundColor: 'rgba(2, 132, 199, 0.1)', color: 'var(--secondary)', marginBottom: '20px', display: 'flex' }}>
                 <Dna size={32} />
               </div>
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '16px' }}>NIPT Screen Overview</h3>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '16px', fontWeight: 700 }}>NIFTY Screen Overview</h3>
               <p className="small-text text-muted mb-6" style={{ lineHeight: '1.6' }}>
-                A simple blood draw screening fetal cell-free DNA (cfDNA) circulating in maternal plasma to estimate chromosomal health probabilities.
+                A simple, non-invasive maternal blood draw screening placental cell-free DNA (cfDNA) to assess fetal chromosomal health parameters.
               </p>
               
-              <div className="grid grid-2 gap-3 w-full" style={{ marginTop: 'auto' }}>
+              <div className="grid grid-2 gap-3 w-full" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div style={{ padding: '10px 14px', borderRadius: '12px', background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', fontSize: '0.8rem', fontWeight: 600 }}>
-                  🔹 From 10 weeks
+                  🔹 Week 10+ Timing
                 </div>
                 <div style={{ padding: '10px 14px', borderRadius: '12px', background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', fontSize: '0.8rem', fontWeight: 600 }}>
-                  🩸 Blood sample based
+                  🩸 7-10ml Blood Draw
                 </div>
                 <div style={{ padding: '10px 14px', borderRadius: '12px', background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', fontSize: '0.8rem', fontWeight: 600 }}>
-                  ⚖️ Screening test
+                  ⚖️ Screening Method
                 </div>
                 <div style={{ padding: '10px 14px', borderRadius: '12px', background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', fontSize: '0.8rem', fontWeight: 600 }}>
-                  🩺 Clinical guidance
+                  ✍️ Signed Consent
                 </div>
               </div>
             </div>
@@ -127,379 +121,231 @@ export default function Nipt() {
         </div>
       </section>
 
-      {/* Trust Strip */}
-      <section style={{ padding: '24px 0', background: 'var(--bg-tertiary)', borderBottom: '1px solid var(--border-color)' }}>
-        <div className="container" style={{ maxWidth: '1200px' }}>
-          <div className="grid grid-4" style={{ gap: '20px' }}>
-            <div className="flex-row align-center gap-3" style={{ padding: '12px', borderRadius: '12px' }}>
-              <CheckCircle2 size={18} className="text-accent" />
-              <div>
-                <h5 style={{ margin: 0, fontSize: '0.9rem' }}>From 10 Weeks</h5>
-                <p className="xsmall-text text-muted" style={{ margin: 0 }}>Early prenatal screening</p>
-              </div>
-            </div>
-            <div className="flex-row align-center gap-3" style={{ padding: '12px', borderRadius: '12px' }}>
-              <CheckCircle2 size={18} className="text-accent" />
-              <div>
-                <h5 style={{ margin: 0, fontSize: '0.9rem' }}>Maternal Blood Sample</h5>
-                <p className="xsmall-text text-muted" style={{ margin: 0 }}>Safe and non-invasive draw</p>
-              </div>
-            </div>
-            <div className="flex-row align-center gap-3" style={{ padding: '12px', borderRadius: '12px' }}>
-              <CheckCircle2 size={18} className="text-accent" />
-              <div>
-                <h5 style={{ margin: 0, fontSize: '0.9rem' }}>Trisomy Screening</h5>
-                <p className="xsmall-text text-muted" style={{ margin: 0 }}>Detect probability factors</p>
-              </div>
-            </div>
-            <div className="flex-row align-center gap-3" style={{ padding: '12px', borderRadius: '12px' }}>
-              <CheckCircle2 size={18} className="text-accent" />
-              <div>
-                <h5 style={{ margin: 0, fontSize: '0.9rem' }}>Genetic Counselling</h5>
-                <p className="xsmall-text text-muted" style={{ margin: 0 }}>Qualified medical support</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 1: What is NIPT? */}
+      {/* Concept Description: Screening vs Diagnostic */}
       <section id="what-is-nipt" className="section" style={{ padding: '80px 0' }}>
         <div className="container" style={{ maxWidth: '1200px' }}>
-          <div className="grid grid-2" style={{ alignItems: 'center', gap: '48px' }}>
+          <div className="grid grid-2" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '48px', alignItems: 'center' }}>
             <div>
-              <span className="badge badge-accent mb-3">About The Test</span>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.3rem)', marginBottom: '20px' }}>What is NIPT?</h2>
+              <span className="badge badge-accent mb-3">Screening vs. Diagnostic</span>
+              <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.3rem)', fontWeight: 700, marginBottom: '20px' }}>Understanding Prenatal Screening</h2>
               <p className="lead-text" style={{ fontSize: '1.1rem', lineHeight: '1.7', color: 'var(--text-main)', marginBottom: '16px' }}>
-                NIPT (Non-Invasive Prenatal Testing) is a cell-free DNA screening option that evaluates chromosomal risk metrics using maternal blood plasma.
+                It is clinically vital to distinguish between a prenatal screening test and a confirmatory diagnostic test.
               </p>
-              <p className="small-text text-muted" style={{ lineHeight: '1.7', marginBottom: '24px' }}>
-                NIPT is a screening test that analyzes cell-free fetal DNA circulating in the mother's plasma. It determines the probability of specific chromosomal configurations in the pregnancy, rather than confirming their presence definitively. It does not carry the safety risks associated with invasive prenatal procedures.
+              <p className="small-text text-muted" style={{ lineHeight: '1.7', marginBottom: '16px' }}>
+                <strong>NIPT is a screening test.</strong> It evaluates circulating cell-free fetal DNA fragments from the placenta in the maternal bloodstream to calculate the probability of chromosomal trisomies. It does not provide absolute diagnostic certainty.
+              </p>
+              <p className="small-text text-muted" style={{ lineHeight: '1.7', marginBottom: '0' }}>
+                <strong>Confirmatory diagnosis</strong> requires invasive procedures such as Amniocentesis or Chorionic Villus Sampling (CVS). These diagnostic tests analyze actual fetal cells, carrying a small procedure-related risk, but provide a definitive clinical diagnosis.
               </p>
             </div>
             
-            <div className="card flex-col" style={{ padding: '32px', background: 'rgba(239, 68, 68, 0.03)', borderColor: 'rgba(239, 68, 68, 0.2)', borderRadius: '20px' }}>
-              <div className="flex-row align-center gap-3 text-gold" style={{ marginBottom: '16px', color: '#dc2626' }}>
+            <div className="card flex-col" style={{ padding: '36px', background: 'rgba(239, 68, 68, 0.03)', borderColor: 'rgba(239, 68, 68, 0.15)', borderRadius: '20px', display: 'flex', gap: '16px' }}>
+              <div className="flex-row align-center gap-3 text-gold" style={{ display: 'flex', alignItems: 'center', color: '#dc2626' }}>
                 <ShieldAlert size={28} />
-                <h4 style={{ margin: 0, color: '#dc2626', fontSize: '1.15rem' }}>Important Medical Notice</h4>
+                <h4 style={{ margin: 0, color: '#dc2626', fontSize: '1.15rem', fontWeight: 700 }}>Clinical Safety Notice</h4>
               </div>
-              <p className="small-text" style={{ color: 'var(--text-muted)', lineHeight: '1.6', margin: 0 }}>
-                NIPT is a screening test, not a diagnostic test. High-risk results should always be discussed with a qualified medical professional (such as a clinical geneticist) and may require confirmatory diagnostic testing (like amniocentesis or CVS) before clinical decisions can be made.
+              <p className="small-text text-muted" style={{ lineHeight: '1.6', margin: 0 }}>
+                High-risk screening results must never be interpreted as a definitive diagnosis or used as the sole basis for clinical decisions. Professional genetic counselling is required to review history, coordinate confirmatory testing options, and guide management.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Section 2: What can NIPT screen for? */}
-      <section className="section section-light" style={{ padding: '80px 0' }}>
+      {/* NIFTY Series & NIFTY Mono Options */}
+      <section className="section section-light" style={{ padding: '60px 0 80px' }}>
         <div className="container" style={{ maxWidth: '1200px' }}>
           <div className="text-center mb-12">
-            <span className="badge badge-accent mb-3">Screening Scope</span>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.3rem)' }}>What can NIPT screen for?</h2>
-            <p className="small-text text-muted" style={{ maxWidth: '680px', margin: '12px auto 0', lineHeight: '1.7' }}>
-              NIPT screens for common chromosomal conditions and optional anomalies depending on the selected test depth. Screening availability is subject to the specific test panel chosen.
+            <span className="badge badge-accent mb-2">Screening Options</span>
+            <h2>The NIFTY Series Prenatal Screens</h2>
+            <p className="small-text text-muted" style={{ maxWidth: '600px', margin: '8px auto 0' }}>
+              We coordinate sample dispatch for standard chromosomal aneuploidies as well as advanced single-gene disorder screens.
             </p>
           </div>
-          
-          <div className="grid grid-3" style={{ gap: '24px' }}>
-            <div className="card card-glass" style={{ padding: '28px', transition: 'transform 0.3s' }}>
-              <div className="flex-row-between mb-4">
-                <h4 style={{ fontSize: '1.1rem' }}>Trisomy 21</h4>
-                <span className="badge badge-accent" style={{ fontSize: '0.65rem' }}>Down Syndrome</span>
-              </div>
+
+          <div className="grid grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
+            <div className="card" style={{ padding: '28px', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+              <h4 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '12px' }}>NIFTY Standard</h4>
+              <span className="badge badge-accent mb-4">Core Chromosomes</span>
               <p className="xsmall-text text-muted" style={{ lineHeight: '1.6' }}>
-                Screens for an extra copy of chromosome 21, the most common cause of developmental delays and intellectual differences.
-              </p>
-            </div>
-            
-            <div className="card card-glass" style={{ padding: '28px' }}>
-              <div className="flex-row-between mb-4">
-                <h4 style={{ fontSize: '1.1rem' }}>Trisomy 18</h4>
-                <span className="badge badge-accent" style={{ fontSize: '0.65rem' }}>Edwards Syndrome</span>
-              </div>
-              <p className="xsmall-text text-muted" style={{ lineHeight: '1.6' }}>
-                Screens for an extra copy of chromosome 18. This condition is associated with severe physical and physiological differences.
-              </p>
-            </div>
-            
-            <div className="card card-glass" style={{ padding: '28px' }}>
-              <div className="flex-row-between mb-4">
-                <h4 style={{ fontSize: '1.1rem' }}>Trisomy 13</h4>
-                <span className="badge badge-accent" style={{ fontSize: '0.65rem' }}>Patau Syndrome</span>
-              </div>
-              <p className="xsmall-text text-muted" style={{ lineHeight: '1.6' }}>
-                Screens for an extra copy of chromosome 13. Associated with structural heart, neurological, and physical developmental issues.
+                Screens for the three primary fetal chromosomal aneuploidies: Trisomy 21 (Down Syndrome), Trisomy 18 (Edwards Syndrome), and Trisomy 13 (Patau Syndrome).
               </p>
             </div>
 
-            <div className="card card-glass" style={{ padding: '28px' }}>
-              <div className="flex-row-between mb-4">
-                <h4 style={{ fontSize: '1.1rem' }}>Sex Chromosomes</h4>
-                <span className="badge badge-gold" style={{ fontSize: '0.65rem' }}>Optional</span>
-              </div>
+            <div className="card" style={{ padding: '28px', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+              <h4 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '12px' }}>NIFTY Plus</h4>
+              <span className="badge badge-accent mb-4">Expanded Panel</span>
               <p className="xsmall-text text-muted" style={{ lineHeight: '1.6' }}>
-                Screens for atypical configurations such as Monosomy X (Turner Syndrome), XXY (Klinefelter Syndrome), or extra X/Y chromosomes.
+                Includes screening for the core trisomies, sex chromosome aneuploidies (XO, XXY, XXX, XYY), and selected chromosomal microdeletions/duplications.
               </p>
             </div>
 
-            <div className="card card-glass" style={{ padding: '28px' }}>
-              <div className="flex-row-between mb-4">
-                <h4 style={{ fontSize: '1.1rem' }}>Microdeletions</h4>
-                <span className="badge badge-gold" style={{ fontSize: '0.65rem' }}>Optional</span>
-              </div>
+            <div className="card" style={{ padding: '28px', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', position: 'relative' }}>
+              <div style={{ position: 'absolute', top: '16px', right: '16px' }} className="text-accent"><Info size={20} /></div>
+              <h4 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '12px' }}>NIFTY Mono</h4>
+              <span className="badge badge-gold mb-4">Monogenic Panel</span>
               <p className="xsmall-text text-muted" style={{ lineHeight: '1.6' }}>
-                Screens for missing chromosomal pieces (e.g. DiGeorge, Angelman, Prader-Willi syndromes) depending on custom expanded test parameters.
-              </p>
-            </div>
-
-            <div className="card card-glass" style={{ padding: '28px', borderColor: 'rgba(2, 132, 199, 0.3)' }}>
-              <div className="flex-row-between mb-4">
-                <h4 style={{ fontSize: '1.1rem', color: 'var(--secondary)' }}>Test Limitations</h4>
-                <Info size={16} className="text-accent" />
-              </div>
-              <p className="xsmall-text text-muted" style={{ lineHeight: '1.6' }}>
-                Screening availability and options depend on the selected test type. Suitability should be discussed during pre-test counselling.
+                Advanced screening for 20+ dominant single-gene disorders (monogenic conditions) such as achondroplasia, Noonan syndrome, and Rett syndrome—often associated with paternal age.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Section 3: Who may consider NIPT? */}
+      {/* Suitability & Consent Guidelines */}
       <section className="section" style={{ padding: '80px 0' }}>
         <div className="container" style={{ maxWidth: '1200px' }}>
-          <div className="text-center mb-12">
-            <span className="badge badge-gold mb-3">Target Eligibility</span>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.3rem)' }}>Who may consider NIPT?</h2>
-            <p className="small-text text-muted" style={{ maxWidth: '680px', margin: '12px auto 0', lineHeight: '1.7' }}>
-              NIPT can be requested by any pregnant mother starting from week 10, though certain clinical indications make prenatal screening particularly helpful.
-            </p>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'start' }}>
+            
+            {/* Suitability Criteria */}
+            <div className="card" style={{ padding: '36px', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '20px' }}>Suitability & Criteria</h3>
+              
+              <div className="flex-col gap-4">
+                <div>
+                  <h5 style={{ margin: '0 0 6px', fontSize: '0.92rem', fontWeight: 700 }}>Singleton & Twin Pregnancies</h5>
+                  <p className="xsmall-text text-muted" style={{ margin: 0, lineHeight: '1.5' }}>
+                    Highly suitable for singleton gestations and twin gestations (both identical and fraternal). Accuracy values remain high across standard trisomy screens.
+                  </p>
+                </div>
+                <div>
+                  <h5 style={{ margin: '0 0 6px', fontSize: '0.92rem', fontWeight: 700 }}>IVF & Egg Donor Pregnancies</h5>
+                  <p className="xsmall-text text-muted" style={{ margin: 0, lineHeight: '1.5' }}>
+                    Suitable for pregnancies achieved via in vitro fertilization (IVF), including self-egg, donor-egg, and surrogate pregnancy options.
+                  </p>
+                </div>
+                <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '16px' }}>
+                  <h5 style={{ margin: '0 0 6px', fontSize: '0.92rem', fontWeight: 700 }} className="text-gold">Exclusion Criteria</h5>
+                  <p className="xsmall-text text-muted" style={{ margin: 0, lineHeight: '1.5' }}>
+                    NIPT is <strong>not suitable</strong> for patients who have undergone organ transplants, stem cell therapy, recent immunotherapy, allogeneic blood transfusions within the last 12 months, or mothers with diagnosed chromosomal abnormalities/malignancies.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Consent & Counseling Requirements */}
+            <div className="card" style={{ padding: '36px', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+              <h3 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '20px' }}>Mandatory Consent & Counselling</h3>
+              
+              <div className="flex-col gap-4">
+                <div className="flex-row gap-3 align-start" style={{ display: 'flex' }}>
+                  <ClipboardCheck size={20} className="text-accent flex-shrink-0" style={{ marginTop: '2px' }} />
+                  <div>
+                    <h5 style={{ margin: '0 0 4px', fontSize: '0.92rem', fontWeight: 700 }}>Informed Consent</h5>
+                    <p className="xsmall-text text-muted" style={{ margin: 0, lineHeight: '1.5' }}>
+                      A signed, legal informed consent document is mandatory before sample draw. Patients must be fully briefed on the test's scope, detection limitations, potential false positives/negatives, and confirmatory options.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex-row gap-3 align-start" style={{ display: 'flex' }}>
+                  <Users size={20} className="text-accent flex-shrink-0" style={{ marginTop: '2px' }} />
+                  <div>
+                    <h5 style={{ margin: '0 0 4px', fontSize: '0.92rem', fontWeight: 700 }}>Pre-Test Counselling</h5>
+                    <p className="xsmall-text text-muted" style={{ margin: 0, lineHeight: '1.5' }}>
+                      Counselling by Dr. Lahiru Prabodha confirms correct gestational age (10+ weeks verified by ultrasound), evaluates family histories for microdeletions or genetic syndromes, and aligns the appropriate panel choice.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex-row gap-3 align-start" style={{ display: 'flex' }}>
+                  <FileText size={20} className="text-accent flex-shrink-0" style={{ marginTop: '2px' }} />
+                  <div>
+                    <h5 style={{ margin: '0 0 4px', fontSize: '0.92rem', fontWeight: 700 }}>Post-Test Interpretation</h5>
+                    <p className="xsmall-text text-muted" style={{ margin: 0, lineHeight: '1.5' }}>
+                      Once results are returned, a structured review session explains low-risk reassurance levels or guides next-step referral pathways in the event of high-risk flags.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
+        </div>
+      </section>
 
-          <div className="grid grid-3" style={{ gap: '24px' }}>
-            <div className="card flex-col align-start" style={{ padding: '24px' }}>
-              <div className="flex-row-center mb-3" style={{ width: '42px', height: '42px', borderRadius: '50%', background: 'rgba(2, 132, 199, 0.08)', color: 'var(--secondary)' }}>
-                <CheckCircle2 size={20} />
-              </div>
-              <h4 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Early Prenatal Seekers</h4>
-              <p className="xsmall-text text-muted" style={{ lineHeight: '1.6' }}>
-                Couples seeking highly accurate, non-invasive risk screening at the start of pregnancy (from week 10 onwards).
+      {/* Sample Collection Logistics & Rejection Criteria */}
+      <section className="section section-light" style={{ padding: '80px 0' }}>
+        <div className="container" style={{ maxWidth: '1200px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '40px', alignItems: 'start' }}>
+            
+            {/* Logistics */}
+            <div>
+              <span className="badge badge-accent mb-3">Laboratory Protocols</span>
+              <h2 style={{ fontSize: '1.8rem', fontWeight: 700, marginBottom: '20px' }}>Sample Collection Logistics</h2>
+              <p className="small-text text-muted" style={{ lineHeight: '1.7', marginBottom: '20px' }}>
+                All prenatal screening samples coordinate through strict logistics pathways. Fetal cell-free DNA fractions must be preserved intact from sample collection to extraction.
               </p>
+              
+              <div className="flex-col gap-4">
+                <div className="flex-row gap-3 align-start" style={{ display: 'flex' }}>
+                  <div className="flex-row-center text-accent" style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(15, 118, 110, 0.08)', display: 'flex' }}>1</div>
+                  <div>
+                    <h5 style={{ margin: '0 0 4px', fontSize: '0.9rem', fontWeight: 700 }}>Approved Collection Tubes</h5>
+                    <p className="xsmall-text text-muted" style={{ margin: 0, lineHeight: '1.5' }}>
+                      Draw 7–10ml of maternal blood strictly in approved cell-free DNA stabilizing tubes (e.g. Streck tubes). Standard gel or EDTA tubes are not acceptable.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex-row gap-3 align-start" style={{ display: 'flex' }}>
+                  <div className="flex-row-center text-accent" style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(15, 118, 110, 0.08)', display: 'flex' }}>2</div>
+                  <div>
+                    <h5 style={{ margin: '0 0 4px', fontSize: '0.9rem', fontWeight: 700 }}>Temperature Logging</h5>
+                    <p className="xsmall-text text-muted" style={{ margin: 0, lineHeight: '1.5' }}>
+                      Store and transport whole blood samples at ambient room temperature (10°C–30°C). <strong>Never freeze whole blood samples</strong> or pack them directly against ice, as cold temperatures cause maternal blood cell lysis, diluting the fetal DNA fraction.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex-row gap-3 align-start" style={{ display: 'flex' }}>
+                  <div className="flex-row-center text-accent" style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(15, 118, 110, 0.08)', display: 'flex' }}>3</div>
+                  <div>
+                    <h5 style={{ margin: '0 0 4px', fontSize: '0.9rem', fontWeight: 700 }}>Prompt Dispatch</h5>
+                    <p className="xsmall-text text-muted" style={{ margin: 0, lineHeight: '1.5' }}>
+                      Pack samples securely in secondary biohazard mailers and dispatch them immediately. Processing must begin within the stabilizing tube window to ensure high-quality sequencing.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="card flex-col align-start" style={{ padding: '24px' }}>
-              <div className="flex-row-center mb-3" style={{ width: '42px', height: '42px', borderRadius: '50%', background: 'rgba(2, 132, 199, 0.08)', color: 'var(--secondary)' }}>
-                <Users size={20} />
-              </div>
-              <h4 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Advanced Maternal Age</h4>
-              <p className="xsmall-text text-muted" style={{ lineHeight: '1.6' }}>
-                Recommended where the maternal age is 35 years or older at delivery, as statistical trisomy probabilities naturally increase.
-              </p>
-            </div>
-
-            <div className="card flex-col align-start" style={{ padding: '24px' }}>
-              <div className="flex-row-center mb-3" style={{ width: '42px', height: '42px', borderRadius: '50%', background: 'rgba(2, 132, 199, 0.08)', color: 'var(--secondary)' }}>
-                <Stethoscope size={20} />
-              </div>
-              <h4 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Atypical Ultrasound Findings</h4>
-              <p className="xsmall-text text-muted" style={{ lineHeight: '1.6' }}>
-                When routine prenatal ultrasound scans or biochemical screens show atypical results that require further clinical genetic guidance.
-              </p>
-            </div>
-
-            <div className="card flex-col align-start" style={{ padding: '24px' }}>
-              <div className="flex-row-center mb-3" style={{ width: '42px', height: '42px', borderRadius: '50%', background: 'rgba(2, 132, 199, 0.08)', color: 'var(--secondary)' }}>
+            {/* Rejection Criteria */}
+            <div className="card" style={{ padding: '32px', background: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+              <div className="flex-row align-center gap-2 mb-4 text-gold" style={{ display: 'flex', alignItems: 'center', color: 'var(--gold)' }}>
                 <AlertTriangle size={20} />
+                <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700 }}>Sample Rejection Reasons</h4>
               </div>
-              <h4 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Family History Risks</h4>
-              <p className="xsmall-text text-muted" style={{ lineHeight: '1.6' }}>
-                Where there is a medical family history of chromosomal microdeletions, aneuploidies, or previous pregnancies with genetic conditions.
-              </p>
-            </div>
-
-            <div className="card flex-col align-start" style={{ padding: '24px' }}>
-              <div className="flex-row-center mb-3" style={{ width: '42px', height: '42px', borderRadius: '50%', background: 'rgba(2, 132, 199, 0.08)', color: 'var(--secondary)' }}>
-                <Heart size={20} />
-              </div>
-              <h4 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>IVF or Egg Donor Cases</h4>
-              <p className="xsmall-text text-muted" style={{ lineHeight: '1.6' }}>
-                Assisted reproductive pregnancies where precision algorithms must account for specific donor conditions or twin parameters.
-              </p>
-            </div>
-
-            <div className="card flex-col align-start" style={{ padding: '24px', borderColor: 'rgba(2, 132, 199, 0.3)' }}>
-              <div className="flex-row-center mb-3" style={{ width: '42px', height: '42px', borderRadius: '50%', background: 'rgba(2, 132, 199, 0.08)', color: 'var(--secondary)' }}>
-                <Info size={20} className="text-accent" />
-              </div>
-              <h4 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Clinical Assessment Required</h4>
-              <p className="xsmall-text text-muted" style={{ lineHeight: '1.6' }}>
-                NIPT suitability should be confirmed by a qualified medical practitioner before proceeding with sample collection.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 4: NIPT Patient Journey */}
-      <section className="section section-light" style={{ padding: '80px 0' }}>
-        <div className="container" style={{ maxWidth: '1200px' }}>
-          <div className="text-center mb-12">
-            <span className="badge badge-accent mb-3">Process Protocol</span>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.3rem)' }}>NIPT Patient Journey</h2>
-            <p className="small-text text-muted" style={{ maxWidth: '680px', margin: '12px auto 0', lineHeight: '1.7' }}>
-              A straightforward step-by-step pathway from consultation to receiving responsible professional genetics reports.
-            </p>
-          </div>
-
-          <div className="grid grid-5-cols" style={{ gap: '20px' }}>
-            <div className="card flex-col align-start" style={{ padding: '20px', background: 'var(--bg-secondary)', position: 'relative' }}>
-              <span style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--border-color)', position: 'absolute', top: '16px', right: '16px', lineHeight: 1 }}>01</span>
-              <div className="flex-row-center mb-4" style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(2, 132, 199, 0.1)', color: 'var(--secondary)' }}>
-                <Calendar size={16} />
-              </div>
-              <h5 style={{ fontSize: '0.95rem', marginBottom: '8px' }}>1. Book Consultation</h5>
-              <p className="xsmall-text text-muted" style={{ lineHeight: '1.5' }}>Schedule a consultation to discuss test eligibility.</p>
-            </div>
-
-            <div className="card flex-col align-start" style={{ padding: '20px', background: 'var(--bg-secondary)', position: 'relative' }}>
-              <span style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--border-color)', position: 'absolute', top: '16px', right: '16px', lineHeight: 1 }}>02</span>
-              <div className="flex-row-center mb-4" style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(2, 132, 199, 0.1)', color: 'var(--secondary)' }}>
-                <ClipboardCheck size={16} />
-              </div>
-              <h5 style={{ fontSize: '0.95rem', marginBottom: '8px' }}>2. Clinical History</h5>
-              <p className="xsmall-text text-muted" style={{ lineHeight: '1.5' }}>Review pregnancy timeline and family clinical logs.</p>
-            </div>
-
-            <div className="card flex-col align-start" style={{ padding: '20px', background: 'var(--bg-secondary)', position: 'relative' }}>
-              <span style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--border-color)', position: 'absolute', top: '16px', right: '16px', lineHeight: 1 }}>03</span>
-              <div className="flex-row-center mb-4" style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(2, 132, 199, 0.1)', color: 'var(--secondary)' }}>
-                <Dna size={16} />
-              </div>
-              <h5 style={{ fontSize: '0.95rem', marginBottom: '8px' }}>3. Select Test Option</h5>
-              <p className="xsmall-text text-muted" style={{ lineHeight: '1.5' }}>Choose standard screening or expanded microdeletion options.</p>
-            </div>
-
-            <div className="card flex-col align-start" style={{ padding: '20px', background: 'var(--bg-secondary)', position: 'relative' }}>
-              <span style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--border-color)', position: 'absolute', top: '16px', right: '16px', lineHeight: 1 }}>04</span>
-              <div className="flex-row-center mb-4" style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(2, 132, 199, 0.1)', color: 'var(--secondary)' }}>
-                <Heart size={16} />
-              </div>
-              <h5 style={{ fontSize: '0.95rem', marginBottom: '8px' }}>4. Blood Collection</h5>
-              <p className="xsmall-text text-muted" style={{ lineHeight: '1.5' }}>Safe collection of maternal blood in approved cfDNA tubes.</p>
-            </div>
-
-            <div className="card flex-col align-start" style={{ padding: '20px', background: 'var(--bg-secondary)', position: 'relative' }}>
-              <span style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--border-color)', position: 'absolute', top: '16px', right: '16px', lineHeight: 1 }}>05</span>
-              <div className="flex-row-center mb-4" style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(2, 132, 199, 0.1)', color: 'var(--secondary)' }}>
-                <FileText size={16} />
-              </div>
-              <h5 style={{ fontSize: '0.95rem', marginBottom: '8px' }}>5. Professional Guidance</h5>
-              <p className="xsmall-text text-muted" style={{ lineHeight: '1.5' }}>Review reports with responsible medical interpretation.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 5: Important Limitations */}
-      <section className="section" style={{ padding: '80px 0' }}>
-        <div className="container" style={{ maxWidth: '900px' }}>
-          <div className="card" style={{ padding: '36px', borderLeft: '6px solid var(--gold)', background: 'var(--bg-tertiary)' }}>
-            <div className="flex-row align-center gap-3 text-gold mb-4" style={{ color: 'var(--gold)' }}>
-              <AlertTriangle size={28} />
-              <h3 style={{ margin: 0, fontSize: '1.35rem' }}>Important Limitations & Screening Facts</h3>
-            </div>
-            
-            <p className="small-text text-muted mb-6" style={{ lineHeight: '1.7' }}>
-              A responsible prenatal screening path requires understanding what NIPT can and cannot do:
-            </p>
-            
-            <ul className="styled-list flex-col gap-3" style={{ listStyleType: 'none', paddingLeft: 0 }}>
-              <li className="xsmall-text flex-row gap-2 text-muted" style={{ lineHeight: '1.6' }}>
-                ✔️ <strong>Screening Test Only:</strong> NIPT estimates probability metrics. It does not provide diagnostic certainty or act as a confirmatory test.
-              </li>
-              <li className="xsmall-text flex-row gap-2 text-muted" style={{ lineHeight: '1.6' }}>
-                ✔️ <strong>No Structural Detection:</strong> It does not screen for developmental abnormalities, physical mutations, or neural tube defects (e.g. spina bifida).
-              </li>
-              <li className="xsmall-text flex-row gap-2 text-muted" style={{ lineHeight: '1.6' }}>
-                ✔️ <strong>Biological Variance:</strong> False positives and false negatives, although statistically rare, are biologically possible.
-              </li>
-              <li className="xsmall-text flex-row gap-2 text-muted" style={{ lineHeight: '1.6' }}>
-                ✔️ <strong>Maternal & Twin Factors:</strong> Maternal chromosomal patterns, malignancies, donor details, or twin factors may impact screening calculations.
-              </li>
-              <li className="xsmall-text flex-row gap-2 text-muted" style={{ lineHeight: '1.6' }}>
-                ✔️ <strong>Confirmatory Path:</strong> High-risk screening flags require professional clinical genetic evaluation and confirmation via invasive diagnostics where appropriate.
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 6: Sample Collection Overview */}
-      <section className="section section-light" style={{ padding: '80px 0' }}>
-        <div className="container" style={{ maxWidth: '1200px' }}>
-          <div className="text-center mb-12">
-            <span className="badge badge-accent mb-3">Clinical Protocols</span>
-            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.3rem)' }}>Sample Collection Overview</h2>
-            <p className="small-text text-muted" style={{ maxWidth: '680px', margin: '12px auto 0', lineHeight: '1.7' }}>
-              Patient blood collection must follow strict laboratory guidelines to preserve cell-free DNA fractions.
-            </p>
-          </div>
-
-          <div className="grid grid-2" style={{ gap: '32px' }}>
-            <div className="card" style={{ padding: '32px', background: 'var(--bg-secondary)' }}>
-              <div className="flex-row align-center gap-3 mb-4">
-                <div className="flex-row-center" style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'rgba(2, 132, 199, 0.1)', color: 'var(--secondary)' }}>
-                  <CheckCircle2 size={18} />
-                </div>
-                <h4 style={{ margin: 0, fontSize: '1.15rem' }}>1. Whole Blood Sample</h4>
-              </div>
-              <ul className="styled-list flex-col gap-2 xsmall-text text-muted" style={{ paddingLeft: 0, listStyle: 'none' }}>
-                <li>🔹 Collected using approved cell-free DNA transport tubes (e.g. Streck) where applicable.</li>
-                <li>🔹 Correct tube labelling, double identifiers, and consent verification required.</li>
-                <li>🔹 Maintain at ambient room temperature (do not freeze whole blood).</li>
+              
+              <ul className="flex-col gap-3 xsmall-text text-muted" style={{ listStyleType: 'disc', paddingLeft: '18px', margin: 0, lineHeight: '1.5' }}>
+                {rejectionReasons.map((reason, idx) => (
+                  <li key={idx}>{reason}</li>
+                ))}
               </ul>
             </div>
 
-            <div className="card" style={{ padding: '32px', background: 'var(--bg-secondary)' }}>
-              <div className="flex-row align-center gap-3 mb-4">
-                <div className="flex-row-center" style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'rgba(2, 132, 199, 0.1)', color: 'var(--secondary)' }}>
-                  <CheckCircle2 size={18} />
-                </div>
-                <h4 style={{ margin: 0, fontSize: '1.15rem' }}>2. Plasma Sample</h4>
-              </div>
-              <ul className="styled-list flex-col gap-2 xsmall-text text-muted" style={{ paddingLeft: 0, listStyle: 'none' }}>
-                <li>🔹 Centrifugation, separation, and cryotube storage should follow approved laboratory protocols.</li>
-                <li>🔹 Correct temperature management (frozen transport on dry ice) is important for plasma shipment.</li>
-                <li>🔹 Utilized specifically when clinical testing pipelines request plasma aliquots.</li>
-              </ul>
-            </div>
           </div>
-          
-          <p className="text-center xsmall-text text-muted mt-8" style={{ fontStyle: 'italic' }}>
-            Detailed sample handling and transport protocol sheets are available for clinical coordinators below.
-          </p>
         </div>
       </section>
 
-      {/* Collapsible Provider section */}
+      {/* Collapsible Provider Transport Instructions */}
       <section className="section" style={{ padding: '40px 0' }}>
         <div className="container" style={{ maxWidth: '800px' }}>
           <div 
             onClick={() => setProviderOpen(!providerOpen)}
             className="flex-row-between cursor-pointer border p-6 rounded-lg bg-secondary"
-            style={{ borderStyle: 'solid', borderColor: 'var(--border-color)', transition: 'background-color var(--transition-fast)' }}
+            style={{ borderStyle: 'solid', borderColor: 'var(--border-color)', transition: 'background-color var(--transition-fast)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
           >
-            <div className="flex-row align-center gap-3">
+            <div className="flex-row align-center gap-3" style={{ display: 'flex', alignItems: 'center' }}>
               <FileText className="text-accent" size={22} />
-              <h3 style={{ margin: 0, fontSize: '1.15rem' }}>For Healthcare Providers: Transport & Dispatch</h3>
+              <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 700 }}>For Healthcare Providers: Transport & Dispatch</h3>
             </div>
             {providerOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
           </div>
  
           {providerOpen && (
-            <div className="card mt-4 animate-fade-in" style={{ padding: '28px', borderTop: '4px solid var(--accent)' }}>
-              <h4 style={{ fontSize: '1.05rem', marginBottom: '12px' }}>Clinical Protocol for Sample Dispatch</h4>
+            <div className="card mt-4 animate-fade-in" style={{ padding: '28px', borderTop: '4px solid var(--accent)', background: 'var(--bg-secondary)' }}>
+              <h4 style={{ fontSize: '1.05rem', marginBottom: '12px', fontWeight: 700 }}>Clinical Protocol for Sample Dispatch</h4>
               <p className="xsmall-text text-muted mb-4" style={{ lineHeight: '1.6' }}>
                 Standard operating procedures for clinical staff when dispatching prenatal screening samples:
               </p>
@@ -532,10 +378,10 @@ export default function Nipt() {
                 style={{ padding: '20px 24px', border: '1px solid var(--border-color)', borderRadius: '16px', cursor: 'pointer' }}
                 onClick={() => toggleFaq(idx)}
               >
-                <div className="flex-row-between align-center">
-                  <div className="flex-row align-center gap-3">
+                <div className="flex-row-between align-center" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div className="flex-row align-center gap-3" style={{ display: 'flex', alignItems: 'center' }}>
                     <HelpCircle size={18} className="text-accent" style={{ flexShrink: 0 }} />
-                    <h4 style={{ fontSize: '1.05rem', margin: 0, fontWeight: 600 }}>{faq.q}</h4>
+                    <h4 style={{ fontSize: '1.05rem', margin: 0, fontWeight: 700 }}>{faq.q}</h4>
                   </div>
                   {activeFaq === idx ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </div>
@@ -553,7 +399,7 @@ export default function Nipt() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="section bg-secondary" style={{ padding: '96px 0', borderTop: '1px solid var(--border-color)' }}>
+      <section className="section bg-secondary" style={{ padding: '80px 0', borderTop: '1px solid var(--border-color)' }}>
         <div className="container text-center" style={{ maxWidth: '800px' }}>
           <span className="badge badge-accent mb-4">Genetic Support</span>
           <h2 style={{ fontSize: 'clamp(2rem, 5vw, 2.6rem)', fontWeight: 800, marginBottom: '16px' }}>
@@ -562,11 +408,11 @@ export default function Nipt() {
           <p className="lead-text text-muted mb-8" style={{ fontSize: '1.1rem', lineHeight: '1.7', maxWidth: '640px', margin: '0 auto 36px' }}>
             Book a consultation to understand whether NIPT is suitable for your pregnancy and how to interpret results responsibly.
           </p>
-          <div className="flex-row-center gap-4 flex-wrap">
+          <div className="flex-row-center gap-4 flex-wrap" style={{ display: 'flex', justifyContent: 'center', gap: '16px' }}>
             <Link to="/appointments?type=NIPT%20consultation" className="btn btn-primary" style={{ padding: '14px 28px' }}>
               Book NIPT Consultation
             </Link>
-            <Link to="/contact" className="btn btn-secondary" style={{ padding: '14px 28px', color: 'var(--text-main)' }}>
+            <Link to="/contact" className="btn btn-secondary" style={{ padding: '14px 28px' }}>
               Contact The Gene Clinic
             </Link>
           </div>
