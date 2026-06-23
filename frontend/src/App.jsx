@@ -22,8 +22,40 @@ import Articles from './pages/Articles';
 import Appointments from './pages/Appointments';
 import AdminDashboard from './pages/AdminDashboard';
 import Research from './pages/Research';
+// New Pages
+import PatientRegistration from './pages/PatientRegistration';
+import PartnerLaboratories from './pages/PartnerLaboratories';
+import Reviews from './pages/Reviews';
+import Contact from './pages/Contact';
 
-// New Pages (None for appointments branch)
+// Simple Legal Subpages to resolve footer links
+function PrivacyPolicy() {
+  return (
+    <div className="container py-12 animate-fade-in" style={{ maxWidth: '800px', margin: '40px auto' }}>
+      <h1 className="text-gradient">Privacy Policy</h1>
+      <p style={{ marginTop: '20px' }}>
+        Last updated: June 16, 2026. At The Gene Clinic, we take the confidentiality of your health data very seriously. All patient files, pedigree structures, and genetic testing outcomes are handled strictly in accordance with national medical privacy guidelines and HIPAA/GDPR health confidentiality requirements.
+      </p>
+      <p style={{ marginTop: '16px' }}>
+        We do not sell or share patient identifiers with third parties. Your records are only released to external partner laboratories for the purpose of genetic testing and to clinical specialists involved in your direct medical care.
+      </p>
+    </div>
+  );
+}
+
+function TermsConditions() {
+  return (
+    <div className="container py-12 animate-fade-in" style={{ maxWidth: '800px', margin: '40px auto' }}>
+      <h1 className="text-gradient">Terms & Conditions</h1>
+      <p style={{ marginTop: '20px' }}>
+        Last updated: June 16, 2026. The information and education contents on this site are designed to explain the general concepts of clinical genetics, DNA testing, and familial disease risk. They do not constitute formal diagnostic medical reports or treatment guidelines.
+      </p>
+      <p style={{ marginTop: '16px' }}>
+        Users must seek a direct consultation with Dr. Lahiru Prabodha or a qualified health practitioner to interpret genetic findings in the context of their specific medical history.
+      </p>
+    </div>
+  );
+}
 
 export default function App() {
   const [isCallbackOpen, setIsCallbackOpen] = useState(false);
@@ -47,6 +79,15 @@ export default function App() {
             <Route path="/appointments" element={<Appointments />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/research" element={<Research />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/test-packages" element={<TestPackages onOpenCallbackModal={() => setIsCallbackOpen(true)} />} />
+            <Route path="/wellness-blueprint" element={<WellnessBlueprint />} />
+            <Route path="/articles" element={<Articles />} />
+            <Route path="/patient-registration" element={<PatientRegistration />} />
+            <Route path="/partner-laboratories" element={<PartnerLaboratories />} />
+            <Route path="/reviews" element={<Reviews />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-conditions" element={<TermsConditions />} />
           </Routes>
         </main>
 

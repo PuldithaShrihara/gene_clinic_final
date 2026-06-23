@@ -5,6 +5,10 @@ import mongoose from 'mongoose';
 
 // Import Mongoose Models
 import Appointment from './models/Appointment.js';
+import Contact from './models/Contact.js';
+import PatientRegistration from './models/PatientRegistration.js';
+import PartnerLabInquiry from './models/PartnerLabInquiry.js';
+import Review from './models/Review.js';
 dotenv.config();
 
 const app = express();
@@ -547,6 +551,208 @@ app.post('/api/appointments', async (req, res) => {
     console.error('Error creating appointment:', err.message);
     res.status(500).json({ error: 'Server error while saving appointment' });
   }
+});
+
+// Contact API
+app.post('/api/contact', async (req, res) => {
+  try {
+    const { name, phone, email, subject, message, preferredContactMethod } = req.body;
+    if (!name || !phone) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+    const newContact = await Contact.create({
+      name,
+      phone,
+      email: email || '',
+      subject: subject || 'Contact Inquiry',
+      message: message || '',
+      preferredContactMethod: preferredContactMethod || 'phone',
+      status: 'Pending'
+    });
+    res.status(201).json(newContact);
+  } catch (err) {
+    console.error('Error creating contact:', err.message);
+    res.status(500).json({ error: 'Server error while saving contact' });
+  }
+});
+
+app.get('/api/contact', async (req, res) => {
+  try {
+    const contacts = await Contact.find().sort({ createdAt: -1 });
+    res.json(contacts);
+  } catch (err) {
+    console.error('Error fetching contacts:', err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+
+// Patient Registrations API
+app.post('/api/patient-registrations', async (req, res) => {
+  try {
+    const { name, dob, age, gender, phone, email, address, nic, emergencyContactName, emergencyContactNumber, reason, medicalCondition, currentMedications, consent, uploadedReports } = req.body;
+    if (!name || !phone || !email || consent === undefined) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+    const newRegistration = await PatientRegistration.create({
+      name,
+      dob: dob || '',
+      age: age || '',
+      gender: gender || '',
+      phone,
+      email,
+      address: address || '',
+      nic: nic || '',
+      emergencyContactName: emergencyContactName || '',
+      emergencyContactNumber: emergencyContactNumber || '',
+      reason: reason || '',
+      medicalCondition: medicalCondition || '',
+      currentMedications: currentMedications || '',
+      uploadedReports: uploadedReports || [],
+      consent,
+      status: 'Registered'
+    });
+    res.status(201).json(newRegistration);
+  } catch (err) {
+    console.error('Error creating patient registration:', err.message);
+    res.status(500).json({ error: 'Server error while saving registration' });
+  }
+});
+
+app.get('/api/patient-registrations', async (req, res) => {
+  try {
+    const registrations = await PatientRegistration.find().sort({ createdAt: -1 });
+    res.json(registrations);
+  } catch (err) {
+    console.error('Error fetching patient registrations:', err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Partner Lab Inquiries API
+app.post('/api/partner-lab-inquiries', async (req, res) => {
+  try {
+    const { labName, contactPerson, phone, email, location, services, message } = req.body;
+    if (!labName || !contactPerson || !phone || !email) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+    const newInquiry = await PartnerLabInquiry.create({
+      labName,
+      contactPerson,
+      phone,
+      email,
+      location: location || '',
+      services: services || '',
+      message: message || '',
+      status: 'Pending'
+    });
+    res.status(201).json(newInquiry);
+  } catch (err) {
+    console.error('Error creating partner lab inquiry:', err.message);
+    res.status(500).json({ error: 'Server error while saving inquiry' });
+  }
+});
+
+app.get('/api/partner-lab-inquiries', async (req, res) => {
+  try {
+    const inquiries = await PartnerLabInquiry.find().sort({ createdAt: -1 });
+    res.json(inquiries);
+  } catch (err) {
+    console.error('Error fetching partner lab inquiries:', err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Reviews API
+app.post('/api/reviews', async (req, res) => {
+  try {
+    const { name, serviceType, rating, review, consent } = req.body;
+    if (!name || !rating || !review || consent === undefined) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+    const newReview = await Review.create({
+      name,
+      serviceType: serviceType || 'General Consultation',
+      rating: Number(rating),
+      review,
+      consent,
+      status: 'Pending'
+    });
+    res.status(201).json(newReview);
+  } catch (err) {
+    console.error('Error creating review:', err.message);
+    res.status(500).json({ error: 'Server error while saving review' });
+  }
+});
+
+app.get('/api/reviews', async (req, res) => {
+  try {
+    const reviews = await Review.find().sort({ createdAt: -1 });
+    res.json(reviews);
+  } catch (err) {
+    console.error('Error fetching reviews:', err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+
+
+
+// Packages API
+app.get('/api/packages', (req, res) => {
+  // Return packages with pricing masked if showPricing is false
+  if (!config.showPricing) {
+    return res.json(testPackages.map(pkg => ({
+      ...pkg,
+      price: 'Available on request'
+    })));
+  }
+  res.json(testPackages);
+});
+
+app.post('/api/packages', (req, res) => {
+  const { name, sampleType, category, explanation, whoFor, deliverables, tat, price, status, remarks } = req.body;
+  
+  if (!name || !sampleType || !category || !explanation || !tat || price === undefined) {
+    return res.status(400).json({ error: 'Missing package fields' });
+  }
+
+  const newPkg = {
+    id: `pkg-${testPackages.length + 1}`,
+    name,
+    sampleType,
+    category,
+    explanation,
+    whoFor: whoFor || '',
+    deliverables: deliverables || '',
+    tat,
+    price: isNaN(Number(price)) ? price : Number(price),
+    status: status || 'Active',
+    remarks: remarks || ''
+  };
+
+  testPackages.push(newPkg);
+  res.status(201).json(newPkg);
+});
+
+app.patch('/api/packages/:id', (req, res) => {
+  const { id } = req.params;
+  const fields = req.body;
+
+  const pkg = testPackages.find(p => p.id === id);
+  if (!pkg) {
+    return res.status(404).json({ error: 'Package not found' });
+  }
+
+  Object.keys(fields).forEach(key => {
+    if (key === 'price') {
+      pkg[key] = isNaN(Number(fields[key])) ? fields[key] : Number(fields[key]);
+    } else if (fields[key] !== undefined) {
+      pkg[key] = fields[key];
+    }
+  });
+
+  res.json(pkg);
 });
 
 app.patch('/api/appointments/:id', async (req, res) => {

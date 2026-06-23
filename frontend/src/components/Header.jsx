@@ -67,6 +67,18 @@ export default function Header() {
               </div>
             </li>
 
+            {/* More Dropdown */}
+            <li className="nav-item-dropdown">
+              <span className={`nav-link ${['/request-genetic-test', '/patient-registration', '/partner-laboratories', '/reviews', '/contact'].includes(location.pathname) ? 'active' : ''}`} style={{ cursor: 'default' }}>
+                More <ChevronDown size={14} />
+              </span>
+              <div className="dropdown-menu" style={{ minWidth: '220px' }}>
+                <Link to="/patient-registration" className="dropdown-item">Patient Registration</Link>
+                <Link to="/partner-laboratories" className="dropdown-item">Partner Laboratories</Link>
+                <Link to="/reviews" className="dropdown-item">Client Reviews</Link>
+                <Link to="/contact" className="dropdown-item">Contact Clinic</Link>
+              </div>
+            </li>
           </ul>
         </nav>
 
@@ -113,6 +125,23 @@ export default function Header() {
             <li><Link to="/services" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>All Services</Link></li>
 
 
+            <li className="mobile-nav-group-title">Patient Portal & Connect</li>
+            <li><Link to="/patient-registration" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Patient Registration</Link></li>
+            <li><Link to="/partner-laboratories" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Partner Laboratories</Link></li>
+            <li><Link to="/reviews" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Client Reviews</Link></li>
+            <li><Link to="/contact" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Contact Clinic</Link></li>
+
+            <li className="mobile-nav-group-title">Follow Us</li>
+            <li style={{ paddingLeft: '16px', marginTop: '10px' }}>
+              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                {/* TODO: Replace # with official social media URLs */}
+                <a href="https://www.facebook.com/people/The-Gene-Clinic/61567109703049/?rdid=oR2IBlj76KtjvPg9&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1KiE6odBpW%2F" target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-sm" style={{ padding: '6px 12px', fontSize: '0.75rem' }}>Facebook</a>
+                <a href="#" target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-sm" style={{ padding: '6px 12px', fontSize: '0.75rem' }}>YouTube</a>
+                <a href="#" target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-sm" style={{ padding: '6px 12px', fontSize: '0.75rem' }}>Instagram</a>
+                <a href="#" target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-sm" style={{ padding: '6px 12px', fontSize: '0.75rem' }}>TikTok</a>
+                <a href="#" target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-sm" style={{ padding: '6px 12px', fontSize: '0.75rem' }}>LinkedIn</a>
+              </div>
+            </li>
             <li className="mobile-drawer-cta" style={{ marginTop: '24px' }}>
               <Link to="/appointments" onClick={closeMenu} className="btn btn-primary w-full text-center">
                 Book Appointment
