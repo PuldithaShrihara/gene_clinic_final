@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 
 // Import Mongoose Models
 import Appointment from './models/Appointment.js';
+import GeneticTestRequest from './models/GeneticTestRequest.js';
 import Contact from './models/Contact.js';
 import PatientRegistration from './models/PatientRegistration.js';
 import PartnerLabInquiry from './models/PartnerLabInquiry.js';
@@ -553,6 +554,41 @@ app.post('/api/appointments', async (req, res) => {
   }
 });
 
+// Genetic Test Requests API
+app.post('/api/genetic-test-requests', async (req, res) => {
+  try {
+    const { name, phone, email, age, testCategory, reason, referralDetails, preferredContactMethod, consent } = req.body;
+    if (!name || !phone || !email || !testCategory || consent === undefined) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+    const newRequest = await GeneticTestRequest.create({
+      name,
+      phone,
+      email,
+      age: age || '',
+      testCategory,
+      reason: reason || '',
+      referralDetails: referralDetails || '',
+      preferredContactMethod: preferredContactMethod || 'email',
+      consent,
+      status: 'Pending'
+    });
+    res.status(201).json(newRequest);
+  } catch (err) {
+    console.error('Error creating genetic test request:', err.message);
+    res.status(500).json({ error: 'Server error while saving test request' });
+  }
+});
+
+app.get('/api/genetic-test-requests', async (req, res) => {
+  try {
+    const requests = await GeneticTestRequest.find().sort({ createdAt: -1 });
+    res.json(requests);
+  } catch (err) {
+    console.error('Error fetching genetic test requests:', err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
 // Contact API
 app.post('/api/contact', async (req, res) => {
   try {
@@ -585,7 +621,6 @@ app.get('/api/contact', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
-
 
 // Patient Registrations API
 app.post('/api/patient-registrations', async (req, res) => {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { API_BASE_URL } from '../config';
 import { 
   ClipboardList, 
   Clock, 
@@ -29,7 +30,7 @@ export default function TestPackages({ onOpenCallbackModal }) {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/packages')
+    fetch(`${API_BASE_URL}/api/packages`)
       .then(res => {
         if (!res.ok) throw new Error('API Error');
         return res.json();
@@ -233,34 +234,64 @@ export default function TestPackages({ onOpenCallbackModal }) {
                   All Packages
                 </button>
                 <button 
-                  onClick={() => setCategoryFilter('Wellness & Lifestyle Packages')} 
+                  onClick={() => setCategoryFilter('Wellness & Lifestyle')} 
                   className="btn"
                   style={{ 
                     padding: '8px 18px', 
                     fontSize: '0.82rem', 
                     borderRadius: '50px',
-                    backgroundColor: categoryFilter === 'Wellness & Lifestyle Packages' ? 'var(--secondary)' : 'var(--bg-secondary)',
-                    color: categoryFilter === 'Wellness & Lifestyle Packages' ? 'white' : 'var(--text-muted)',
-                    border: categoryFilter === 'Wellness & Lifestyle Packages' ? '1px solid transparent' : '1px solid var(--border-color)',
+                    backgroundColor: categoryFilter === 'Wellness & Lifestyle' ? 'var(--secondary)' : 'var(--bg-secondary)',
+                    color: categoryFilter === 'Wellness & Lifestyle' ? 'white' : 'var(--text-muted)',
+                    border: categoryFilter === 'Wellness & Lifestyle' ? '1px solid transparent' : '1px solid var(--border-color)',
                     boxShadow: 'none'
                   }}
                 >
                   Wellness & Lifestyle
                 </button>
                 <button 
-                  onClick={() => setCategoryFilter('Advanced Genomics & Clinical Packages')} 
+                  onClick={() => setCategoryFilter("Women's and Family Health")} 
                   className="btn"
                   style={{ 
                     padding: '8px 18px', 
                     fontSize: '0.82rem', 
                     borderRadius: '50px',
-                    backgroundColor: categoryFilter === 'Advanced Genomics & Clinical Packages' ? 'var(--secondary)' : 'var(--bg-secondary)',
-                    color: categoryFilter === 'Advanced Genomics & Clinical Packages' ? 'white' : 'var(--text-muted)',
-                    border: categoryFilter === 'Advanced Genomics & Clinical Packages' ? '1px solid transparent' : '1px solid var(--border-color)',
+                    backgroundColor: categoryFilter === "Women's and Family Health" ? 'var(--secondary)' : 'var(--bg-secondary)',
+                    color: categoryFilter === "Women's and Family Health" ? 'white' : 'var(--text-muted)',
+                    border: categoryFilter === "Women's and Family Health" ? '1px solid transparent' : '1px solid var(--border-color)',
                     boxShadow: 'none'
                   }}
                 >
-                  Advanced Clinical
+                  Women & Family
+                </button>
+                <button 
+                  onClick={() => setCategoryFilter('Clinical and Disease-Focused')} 
+                  className="btn"
+                  style={{ 
+                    padding: '8px 18px', 
+                    fontSize: '0.82rem', 
+                    borderRadius: '50px',
+                    backgroundColor: categoryFilter === 'Clinical and Disease-Focused' ? 'var(--secondary)' : 'var(--bg-secondary)',
+                    color: categoryFilter === 'Clinical and Disease-Focused' ? 'white' : 'var(--text-muted)',
+                    border: categoryFilter === 'Clinical and Disease-Focused' ? '1px solid transparent' : '1px solid var(--border-color)',
+                    boxShadow: 'none'
+                  }}
+                >
+                  Clinical & Disease
+                </button>
+                <button 
+                  onClick={() => setCategoryFilter('Advanced Genomic Testing')} 
+                  className="btn"
+                  style={{ 
+                    padding: '8px 18px', 
+                    fontSize: '0.82rem', 
+                    borderRadius: '50px',
+                    backgroundColor: categoryFilter === 'Advanced Genomic Testing' ? 'var(--secondary)' : 'var(--bg-secondary)',
+                    color: categoryFilter === 'Advanced Genomic Testing' ? 'white' : 'var(--text-muted)',
+                    border: categoryFilter === 'Advanced Genomic Testing' ? '1px solid transparent' : '1px solid var(--border-color)',
+                    boxShadow: 'none'
+                  }}
+                >
+                  Advanced Genomic
                 </button>
               </div>
             </div>
@@ -377,7 +408,7 @@ export default function TestPackages({ onOpenCallbackModal }) {
                         {pkg.code || 'GC/--'}
                       </span>
                       <span className="badge badge-accent" style={{ fontSize: '0.65rem', padding: '4px 10px' }}>
-                        {pkg.category === 'Wellness & Lifestyle Packages' ? 'Wellness' : 'Clinical'}
+                        {pkg.category}
                       </span>
                     </div>
 
@@ -465,7 +496,7 @@ export default function TestPackages({ onOpenCallbackModal }) {
                           </td>
                           <td style={{ padding: '18px 20px' }}>
                             <span className="badge badge-accent" style={{ fontSize: '0.68rem', padding: '3px 8px' }}>
-                              {pkg.category === 'Wellness & Lifestyle Packages' ? 'Wellness' : 'Clinical'}
+                              {pkg.category}
                             </span>
                           </td>
                           <td style={{ padding: '18px 20px' }}>

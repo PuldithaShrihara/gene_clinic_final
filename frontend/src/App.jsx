@@ -23,6 +23,7 @@ import Appointments from './pages/Appointments';
 import AdminDashboard from './pages/AdminDashboard';
 import Research from './pages/Research';
 // New Pages
+import RequestGeneticTest from './pages/RequestGeneticTest';
 import PatientRegistration from './pages/PatientRegistration';
 import PartnerLaboratories from './pages/PartnerLaboratories';
 import Reviews from './pages/Reviews';
@@ -79,9 +80,10 @@ export default function App() {
             <Route path="/appointments" element={<Appointments />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/research" element={<Research />} />
-            <Route path="/contact" element={<Contact />} />
             <Route path="/test-packages" element={<TestPackages onOpenCallbackModal={() => setIsCallbackOpen(true)} />} />
             <Route path="/wellness-blueprint" element={<WellnessBlueprint />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/request-genetic-test" element={<RequestGeneticTest />} />
             <Route path="/articles" element={<Articles />} />
             <Route path="/patient-registration" element={<PatientRegistration />} />
             <Route path="/partner-laboratories" element={<PartnerLaboratories />} />
