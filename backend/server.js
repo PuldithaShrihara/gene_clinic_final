@@ -18,6 +18,9 @@ if (!process.env.MONGO_URI) {
 }
 const MONGO_URI = process.env.MONGO_URI;
 
+
+
+
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
@@ -29,6 +32,7 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
+
 
 // Articles Data
 const articles = [
@@ -166,30 +170,17 @@ const articles = [
   }
 ];
 
+
 // Articles API
 app.get('/api/articles', (req, res) => {
   res.json(articles);
 });
-
 // Global settings
 let config = {
   showPricing: true // Enabled by client request
 };
 
-// Config Endpoint
-app.get('/api/config', (req, res) => {
-  res.json(config);
-});
-
-app.post('/api/config', (req, res) => {
-  const { showPricing } = req.body;
-  if (showPricing !== undefined) {
-    config.showPricing = showPricing;
-  }
-  res.json(config);
-});
-
-// Test Packages Database
+// Test Packages Database (Annex 3)
 // Test Packages Database (Annex 3)
 let testPackages = [
   {
@@ -491,9 +482,10 @@ let testPackages = [
   }
 ];
 
-// ---------------------------------------------
+
+// =============================================
 // API ROUTES — All data persisted to MongoDB
-// ---------------------------------------------
+// =============================================
 
 // Contact API
 app.post('/api/contact', async (req, res) => {
@@ -527,6 +519,7 @@ app.get('/api/contact', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
+
 
 // Patient Registrations API
 app.post('/api/patient-registrations', async (req, res) => {
@@ -636,6 +629,9 @@ app.get('/api/reviews', async (req, res) => {
   }
 });
 
+
+
+
 // Packages API
 app.get('/api/packages', (req, res) => {
   // Return packages with pricing masked if showPricing is false
@@ -692,6 +688,7 @@ app.patch('/api/packages/:id', (req, res) => {
 
   res.json(pkg);
 });
+
 
 // Connect to MongoDB and start the server only upon success
 mongoose.connect(MONGO_URI)

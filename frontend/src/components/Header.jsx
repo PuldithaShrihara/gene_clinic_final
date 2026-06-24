@@ -68,7 +68,6 @@ export default function Header() {
             </li>
 
 
-
             {/* Resources Dropdown */}
             <li className="nav-item-dropdown">
               <span className={`nav-link ${['/education', '/journey', '/research', '/articles', '/faq'].includes(location.pathname) ? 'active' : ''}`} style={{ cursor: 'default' }}>
@@ -83,7 +82,18 @@ export default function Header() {
               </div>
             </li>
 
-
+            {/* More Dropdown */}
+            <li className="nav-item-dropdown">
+              <span className={`nav-link ${['/request-genetic-test', '/patient-registration', '/partner-laboratories', '/reviews', '/contact'].includes(location.pathname) ? 'active' : ''}`} style={{ cursor: 'default' }}>
+                More <ChevronDown size={14} />
+              </span>
+              <div className="dropdown-menu" style={{ minWidth: '220px' }}>
+                <Link to="/patient-registration" className="dropdown-item">Patient Registration</Link>
+                <Link to="/partner-laboratories" className="dropdown-item">Partner Laboratories</Link>
+                <Link to="/reviews" className="dropdown-item">Client Reviews</Link>
+                <Link to="/contact" className="dropdown-item">Contact Clinic</Link>
+              </div>
+            </li>
           </ul>
         </nav>
 
@@ -125,10 +135,8 @@ export default function Header() {
             <li className="mobile-nav-group-title">About</li>
             <li><Link to="/about" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>About Doctor</Link></li>
             <li><Link to="/clinic" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>The Gene Clinic</Link></li>
-
             <li className="mobile-nav-group-title">Services & Panels</li>
             <li><Link to="/services" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>All Services</Link></li>
-
 
             <li className="mobile-nav-group-title">Resources</li>
             <li><Link to="/education" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Education Hub</Link></li>
@@ -137,7 +145,11 @@ export default function Header() {
             <li><Link to="/articles" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Articles</Link></li>
             <li><Link to="/faq" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>FAQ Accordion</Link></li>
 
-
+            <li className="mobile-nav-group-title">Patient Portal & Connect</li>
+            <li><Link to="/patient-registration" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Patient Registration</Link></li>
+            <li><Link to="/partner-laboratories" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Partner Laboratories</Link></li>
+            <li><Link to="/reviews" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Client Reviews</Link></li>
+            <li><Link to="/contact" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Contact Clinic</Link></li>
 
             <li className="mobile-nav-group-title">Follow Us</li>
             <li style={{ paddingLeft: '16px', marginTop: '10px' }}>
