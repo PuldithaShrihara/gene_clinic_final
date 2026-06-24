@@ -86,6 +86,12 @@ export default function Header() {
                 <Link to="/faq" className="dropdown-item">FAQ</Link>
               </div>
             </li>
+
+            <li>
+              <Link to="/nipt" className={`nav-link ${location.pathname === '/nipt' ? 'active' : ''}`}>
+                NIPT
+              </Link>
+            </li>
             {/* More Dropdown */}
             <li className="nav-item-dropdown">
               <span className={`nav-link ${['/request-genetic-test', '/patient-registration', '/partner-laboratories', '/reviews', '/contact'].includes(location.pathname) ? 'active' : ''}`} style={{ cursor: 'default' }}>
@@ -144,6 +150,7 @@ export default function Header() {
             <li><Link to="/services" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>All Services</Link></li>
             <li><Link to="/packages" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Test Packages</Link></li>
             <li><Link to="/blueprint" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Wellness Blueprint</Link></li>
+            <li><Link to="/nipt" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>NIPT Prenatal Guidance</Link></li>
 
             <li className="mobile-nav-group-title">Resources</li>
             <li><Link to="/education" onClick={closeMenu} className="mobile-nav-link pl-4" style={{ fontSize: '0.9rem' }}>Education Hub</Link></li>

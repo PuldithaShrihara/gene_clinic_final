@@ -485,9 +485,9 @@ let testPackages = [
 ];
 
 
-// =============================================
+// ---------------------------------------------
 // API ROUTES — All data persisted to MongoDB
-// =============================================
+// ---------------------------------------------
 
 // Appointments API
 app.get('/api/appointments', async (req, res) => {
@@ -730,8 +730,134 @@ app.get('/api/reviews', async (req, res) => {
   }
 });
 
+// Stats Endpoint
+app.get('/api/stats', async (req, res) => {
+  try {
+    const totalAppointments = await Appointment.countDocuments();
+    const pending = await Appointment.countDocuments({ status: 'Pending' });
+    const confirmed = await Appointment.countDocuments({ status: 'Confirmed' });
+    const completed = await Appointment.countDocuments({ status: 'Completed' });
+    const totalContacts = await Contact.countDocuments();
+    const totalTestRequests = await GeneticTestRequest.countDocuments();
+    const totalRegistrations = await PatientRegistration.countDocuments();
+    
+    res.json({
+      totalAppointments,
+      pending,
+      confirmed,
+      completed,
+      totalContacts,
+      totalTestRequests,
+      totalRegistrations,
+      activePatientsCount: totalRegistrations || 212,
+      testedCount: totalTestRequests || 178,
+      wellnessConsultations: 89
+    });
+  } catch (err) {
+    console.error('Error fetching stats:', err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
 
+// Config Endpoint
+app.get('/api/config', (req, res) => {
+  res.json(config);
+});
 
+app.post('/api/config', (req, res) => {
+  const { showPricing } = req.body;
+  if (showPricing !== undefined) {
+    config.showPricing = showPricing;
+  }
+  res.json(config);
+});
+
+// Appointments API
+app.get('/api/appointments', async (req, res) => {
+  try {
+    const appointments = await Appointment.find().sort({ createdAt: -1 });
+    res.json(appointments);
+  } catch (err) {
+    console.error('Error fetching appointments:', err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+app.post('/api/appointments', async (req, res) => {
+  try {
+    const { 
+      name, patientName, phone, email, age, appointmentType, location, clinicLocation,
+      mode, preferredMode, reason, message, date, preferredDate, timeSlot, preferredTimeSlot,
+      geneticReport, geneticReportName, medicalReport, medicalReportName, referralReport, referralLetterName, 
+      consent, paymentStatus, source
+    } = req.body;
+    
+    const finalName = name || patientName;
+    const finalLocation = location || clinicLocation;
+    const finalMode = mode || preferredMode;
+    const finalReason = reason;
+
+    if (!finalName || !phone || !email || !appointmentType || !finalLocation || !finalMode || !finalReason || consent === undefined) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    const newAppt = await Appointment.create({
+      name: finalName,
+      patientName: patientName || finalName,
+      phone,
+      email,
+      age: age || '',
+      appointmentType,
+      location: finalLocation,
+      clinicLocation: clinicLocation || finalLocation,
+      mode: finalMode,
+      preferredMode: preferredMode || finalMode,
+      reason: finalReason,
+      message: message || '',
+      status: 'Pending',
+      paymentStatus: paymentStatus || 'Pending',
+      source: source || 'Website Appointment Page',
+      date: date || preferredDate || new Date().toISOString().split('T')[0],
+      preferredDate: preferredDate || date || new Date().toISOString().split('T')[0],
+      timeSlot: timeSlot || preferredTimeSlot || 'TBD',
+      preferredTimeSlot: preferredTimeSlot || timeSlot || 'TBD',
+      geneticReport: geneticReport || null,
+      geneticReportName: geneticReportName || '',
+      medicalReport: medicalReport || null,
+      medicalReportName: medicalReportName || '',
+      referralReport: referralReport || null,
+      referralLetterName: referralLetterName || '',
+      consent
+    });
+
+    res.status(201).json(newAppt);
+  } catch (err) {
+    console.error('Error creating appointment:', err.message);
+    res.status(500).json({ error: 'Server error while saving appointment' });
+  }
+});
+
+app.patch('/api/appointments/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const appt = await Appointment.findById(id);
+    if (!appt) {
+      return res.status(404).json({ error: 'Appointment not found' });
+    }
+
+    if (status) {
+      appt.status = status;
+      await appt.save();
+    }
+
+    res.json(appt);
+  } catch (err) {
+    console.error('Error updating appointment:', err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
 
 // Packages API
 app.get('/api/packages', (req, res) => {
