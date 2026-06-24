@@ -24,6 +24,8 @@ import AdminDashboard from './pages/AdminDashboard';
 import Research from './pages/Research';
 // New Pages
 import RequestGeneticTest from './pages/RequestGeneticTest';
+import Education from './pages/Education';
+import Faq from './pages/Faq';
 import PatientRegistration from './pages/PatientRegistration';
 import PartnerLaboratories from './pages/PartnerLaboratories';
 import Reviews from './pages/Reviews';
@@ -85,6 +87,8 @@ export default function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/request-genetic-test" element={<RequestGeneticTest />} />
             <Route path="/articles" element={<Articles />} />
+            <Route path="/education" element={<Education />} />
+            <Route path="/faq" element={<Faq />} />
             <Route path="/patient-registration" element={<PatientRegistration />} />
             <Route path="/partner-laboratories" element={<PartnerLaboratories />} />
             <Route path="/reviews" element={<Reviews />} />

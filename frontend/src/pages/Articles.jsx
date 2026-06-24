@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import { API_BASE_URL } from '../config';
 import { 
   BookOpen, 
   User, 
@@ -22,7 +23,7 @@ export default function Articles() {
   const location = useLocation();
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/articles')
+    fetch(`${API_BASE_URL}/api/articles`)
       .then(res => res.json())
       .then(data => {
         setArticles(data);
